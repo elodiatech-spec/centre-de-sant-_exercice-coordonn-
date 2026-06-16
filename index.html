@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACSB — Cartographie de l'Exercice Coordonné</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter & Plus Jakarta Sans for premium typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -73,6 +70,17 @@
             box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
         }
 
+        /* Ambient glows corresponding to tiers */
+        .glow-tier-1 {
+            box-shadow: 0 0 25px -5px rgba(45, 95, 63, 0.12);
+        }
+        .glow-tier-2 {
+            box-shadow: 0 0 25px -5px rgba(233, 30, 99, 0.12);
+        }
+        .glow-tier-3 {
+            box-shadow: 0 0 25px -5px rgba(124, 58, 237, 0.1);
+        }
+
         /* CCAS pulse matching premium standard */
         .ccas-pulse-effect {
             box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.5);
@@ -87,14 +95,12 @@
 </head>
 <body class="bg-[#f8fafb] text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-magenta-100 selection:text-magenta-600">
 
-    <!-- HEADER -->
     <header class="bg-white/90 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40 shadow-sm transition-all">
         <div class="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-4">
-                <!-- Official Logo Integration -->
                 <div class="h-14 w-14 flex-shrink-0 relative group">
                     <div class="absolute -inset-1 bg-gradient-to-r from-tropical-500 to-magenta-500 rounded-full blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                    <img src="logo centre de santé du boulevard 2.png" alt="Logo ACSB" class="relative h-full w-full object-contain rounded-full bg-white shadow-inner" onerror="this.src='https://placehold.co/100x100/2D5F3F/FFFFFF?text=ACSB'">
+                    <img src="logo.png" alt="Logo ACSB" class="relative h-full w-full object-contain rounded-full bg-white shadow-inner">
                 </div>
                 <div>
                     <h1 class="text-lg md:text-xl font-bold font-display text-tropical-900 tracking-tight leading-none mb-1">Centre de Santé du Boulevard</h1>
@@ -102,7 +108,6 @@
                 </div>
             </div>
             
-            <!-- Tech/Compliance Indicators -->
             <div class="hidden lg:flex items-center space-x-6 text-xs font-semibold">
                 <span class="flex items-center text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100/60 shadow-sm">
                     <span class="h-2 w-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
@@ -113,15 +118,12 @@
         </div>
     </header>
 
-    <!-- MAIN WRAPPER -->
     <main class="flex-grow max-w-[1700px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         
-        <!-- INTRO HERO PANEL -->
         <div class="relative bg-gradient-to-br from-tropical-50 via-white to-magenta-50/70 rounded-3xl p-6 md:p-8 text-slate-800 overflow-hidden shadow-sm border border-slate-200">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(233,30,99,0.05),transparent_60%)]"></div>
             
             <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Text Area -->
                 <div class="lg:col-span-7 space-y-4">
                     <span class="inline-block text-[10px] uppercase font-bold tracking-widest text-magenta-600 bg-magenta-50 px-3 py-1 rounded-full border border-magenta-100">
                         Projet de Santé ACSB
@@ -133,7 +135,6 @@
                         Explorez l'architecture d'exercice coordonné du <strong>Centre de Santé du Boulevard</strong>. Découvrez les ressources internes de <strong>Niveau 1</strong> (équipe salariée), le réseau conventionné de <strong>Niveau 2</strong> (cliniciens, IPA externes et pharmacien partenaire), et les structures d'accès aux droits et de prévention de <strong>Niveau 3</strong>.
                     </p>
                     
-                    <!-- Navigation Tab Buttons & Website Link -->
                     <div class="flex flex-wrap items-center gap-3 pt-2">
                         <div class="flex flex-row sm:flex-nowrap gap-2 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 inline-flex shadow-inner">
                             <button onclick="switchView('map')" id="btn-view-map" class="px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 bg-white text-tropical-900 shadow-md flex items-center gap-2">
@@ -144,21 +145,18 @@
                             </button>
                         </div>
                         
-                        <!-- Direct link to the lovable app website -->
                         <a href="https://centre-de-sante-du-boulevard.lovable.app" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 bg-magenta-500 text-white shadow-md hover:bg-magenta-600 hover:shadow-lg flex items-center gap-2 border border-magenta-600">
                             <i class="fa-solid fa-globe"></i> Visiter le Site Web
                         </a>
                     </div>
                 </div>
                 
-                <!-- Hero Photo Area (Uses fallback image ONLY in preview, will work locally) -->
-                <div class="hidden lg:flex lg:col-span-5 h-56 xl:h-64 items-center justify-center p-2">
-                    <img src="imagecdsenligne.jpg" alt="Accès au site du Centre de Santé du Boulevard" class="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105 rounded-xl shadow-lg border border-slate-200" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600'; this.classList.remove('object-contain'); this.classList.add('object-cover');">
+                <div class="hidden lg:flex lg:col-span-5 h-56 xl:h-64 items-center justify-center p-2 relative">
+                    <img src="maquette.png" alt="Accès au site du Centre de Santé du Boulevard" class="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105 rounded-xl shadow-lg border border-slate-200 bg-white">
                 </div>
             </div>
         </div>
 
-        <!-- VISUAL RISK / TRIAGE GUIDE -->
         <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
             <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-50 pb-3 gap-2">
                 <div>
@@ -170,7 +168,6 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- RISK 1 CARD (Urgence Vitale) -->
                 <div class="border border-red-100 rounded-2xl overflow-hidden bg-red-50/10 hover:shadow-md transition-all flex flex-col group">
                     <div class="h-28 overflow-hidden relative">
                         <div class="absolute inset-0 bg-red-600/10 z-10"></div>
@@ -189,7 +186,6 @@
                     </div>
                 </div>
 
-                <!-- RISK 2 CARD (Urgence Potentielle) -->
                 <div class="border border-orange-100 rounded-2xl overflow-hidden bg-orange-50/10 hover:shadow-md transition-all flex flex-col group">
                     <div class="h-28 overflow-hidden relative">
                         <div class="absolute inset-0 bg-orange-500/10 z-10"></div>
@@ -208,7 +204,6 @@
                     </div>
                 </div>
 
-                <!-- RISK 3 CARD (Chronique) -->
                 <div class="border border-yellow-200 rounded-2xl overflow-hidden bg-yellow-50/10 hover:shadow-md transition-all flex flex-col group">
                     <div class="h-28 overflow-hidden relative">
                         <div class="absolute inset-0 bg-yellow-500/10 z-10"></div>
@@ -227,7 +222,6 @@
                     </div>
                 </div>
 
-                <!-- RISK 4 CARD (Prévention) -->
                 <div class="border border-emerald-100 rounded-2xl overflow-hidden bg-emerald-50/10 hover:shadow-md transition-all flex flex-col group">
                     <div class="h-28 overflow-hidden relative">
                         <div class="absolute inset-0 bg-emerald-500/10 z-10"></div>
@@ -248,14 +242,11 @@
             </div>
         </div>
 
-        <!-- VIEW 1: INTERACTIVE ARCHITECTURE MAP -->
         <div id="view-map" class="grid grid-cols-1 xl:grid-cols-12 gap-6 transition-all duration-500">
             
-            <!-- LEFT AREA: Interactive Cards Grid -->
             <div class="xl:col-span-8 space-y-6">
                 
-                <!-- LEVEL 1: INTERNAL SALARIED SOCKET -->
-                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative transition-all">
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative glow-tier-1 transition-all">
                     <div class="flex items-center justify-between mb-4 border-b border-slate-50 pb-3">
                         <div class="flex items-center space-x-3">
                             <span class="flex h-6 w-6 rounded-lg bg-tropical-50 text-tropical-500 items-center justify-center text-xs font-bold shadow-sm">1</span>
@@ -313,8 +304,7 @@
                     </div>
                 </div>
 
-                <!-- LEVEL 2: EXTERNAL CLINICAL PARTNERS -->
-                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative transition-all">
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative glow-tier-2 transition-all">
                     <div class="flex items-center justify-between mb-4 border-b border-slate-50 pb-3">
                         <div class="flex items-center space-x-3">
                             <span class="flex h-6 w-6 rounded-lg bg-magenta-50 text-magenta-500 items-center justify-center text-xs font-bold shadow-sm">2</span>
@@ -351,71 +341,57 @@
 
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                         <button onclick="selectNode('idel')" id="node-idel" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-syringe"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-syringe"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">IDEL</span>
                         </button>
                         <button onclick="selectNode('sf')" id="node-sf" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-baby"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-baby"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Sage-femme</span>
                         </button>
                         <button onclick="selectNode('pod')" id="node-pod" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-shoe-prints"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-shoe-prints"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Pédicure-Pod.</span>
                         </button>
                         <button onclick="selectNode('psy')" id="node-psy" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-brain"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-brain"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Psychologue</span>
                         </button>
                         <button onclick="selectNode('diet')" id="node-diet" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-apple-whole"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-apple-whole"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Diététicienne</span>
                         </button>
                         <button onclick="selectNode('mk')" id="node-mk" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-hands-holding"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-hands-holding"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Kinésithérap.</span>
                         </button>
                         <button onclick="selectNode('lab')" id="node-lab" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-flask"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-flask"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Bio-Pôle Lab</span>
                         </button>
                         <button onclick="selectNode('gyno')" id="node-gyno" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-venus"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-venus"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Gynécologue</span>
                         </button>
                         <button onclick="selectNode('dent')" id="node-dent" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-tooth"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-tooth"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Dentistes</span>
                         </button>
                         <button onclick="selectNode('ophtalmo')" id="node-ophtalmo" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-eye"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-eye"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Ophtalmo</span>
                         </button>
                         <button onclick="selectNode('predescu')" id="node-predescu" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-x-ray"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-x-ray"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">Dr Predescu</span>
                         </button>
                         <button onclick="selectNode('had')" id="node-had" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
-                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
-                                <i class="fa-solid fa-house-medical"></i></span>
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200"><i class="fa-solid fa-house-medical"></i></span>
                             <span class="font-bold text-slate-700 leading-tight truncate">HAD / SSIAD</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- LEVEL 3: SEPARATED HUBS (SOCIAL & PREVENTION) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- LEVEL 3A: HUB SOCIAL (Accès aux Droits) -->
                     <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative transition-all flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-4 border-b border-slate-50 pb-3">
@@ -474,7 +450,6 @@
                         </div>
                     </div>
 
-                    <!-- LEVEL 3B: HUB PREVENTION & INTEGRATED CLINICAL DEVICES -->
                     <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative transition-all flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-4 border-b border-slate-50 pb-3">
@@ -507,19 +482,19 @@
                                         </button>
                                         <button onclick="selectNode('csapa')" id="node-csapa" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-pills"></i></span>
-                                            <span class="font-bold text-slate-700 truncate">CSAPA/CAARUD</span>
+                                            <span class="font-bold text-slate-700 truncate">CSAPA / CAARUD</span>
                                         </button>
                                         <button onclick="selectNode('ireps')" id="node-ireps" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-chalkboard-user"></i></span>
-                                            <span class="font-bold text-slate-700 truncate">IREPS</span>
+                                            <span class="font-bold text-slate-700 truncate">IREPS Martinique</span>
                                         </button>
                                         <button onclick="selectNode('afd')" id="node-afd" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-droplet"></i></span>
-                                            <span class="font-bold text-slate-700 truncate">AFD 972</span>
+                                            <span class="font-bold text-slate-700 truncate">AFD 972 (Diabète)</span>
                                         </button>
                                         <button onclick="selectNode('cpamprev')" id="node-cpamprev" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-heart-pulse"></i></span>
-                                            <span class="font-bold text-slate-700 truncate">CPAM Prév.</span>
+                                            <span class="font-bold text-slate-700 truncate">CPAM Prévention</span>
                                         </button>
                                     </div>
                                 </div>
@@ -529,11 +504,11 @@
                                     <div class="grid grid-cols-2 gap-2">
                                         <button onclick="selectNode('mrtc')" id="node-mrtc" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-weight-scale"></i></span>
-                                            <span class="font-bold text-sky-800 truncate">Retrouve Cap</span>
+                                            <span class="font-bold text-sky-800 truncate">Retrouve Ton Cap</span>
                                         </button>
                                         <button onclick="selectNode('mbp')" id="node-mbp" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-clipboard-check"></i></span>
-                                            <span class="font-bold text-sky-800 truncate">Bilan Prev</span>
+                                            <span class="font-bold text-sky-800 truncate">Mon Bilan Prev</span>
                                         </button>
                                         <button onclick="selectNode('chlordecone')" id="node-chlordecone" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-leaf"></i></span>
@@ -541,11 +516,11 @@
                                         </button>
                                         <button onclick="selectNode('cssj')" id="node-cssj" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-venus-mars"></i></span>
-                                            <span class="font-bold text-sky-800 truncate">Santé Sexuelle</span>
+                                            <span class="font-bold text-sky-800 truncate">Santé Sexuelle Jeunes</span>
                                         </button>
                                         <button onclick="selectNode('monsoutienpsy')" id="node-monsoutienpsy" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-head-side-virus"></i></span>
-                                            <span class="font-bold text-sky-800 truncate">Soutien Psy</span>
+                                            <span class="font-bold text-sky-800 truncate">Mon Soutien Psy</span>
                                         </button>
                                         <button onclick="selectNode('depistagecancer')" id="node-depistagecancer" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-stethoscope"></i></span>
@@ -565,15 +540,13 @@
 
             </div>
 
-            <!-- RIGHT AREA: Dynamic Details Sidebar Card -->
             <div class="xl:col-span-4 flex flex-col space-y-6">
-                <!-- Info Display Card -->
                 <div id="details-card" class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm flex-grow flex flex-col justify-between sticky top-24 transition-all duration-300">
                     <div>
-                        <!-- Header with dynamic icon container -->
                         <div class="flex items-start justify-between border-b border-slate-100 pb-4 mb-4">
                             <div class="flex items-center space-x-3 overflow-hidden">
                                 <div id="detail-portrait-container" class="relative flex-shrink-0">
+                                    <div id="detail-photo-ring" class="absolute inset-0 bg-gradient-to-tr from-tropical-500 to-magenta-500 rounded-2xl blur-sm opacity-20"></div>
                                     <div class="relative h-14 w-14 rounded-2xl bg-gradient-to-tr from-tropical-500 to-tropical-600 flex items-center justify-center text-white text-xl shadow-md border border-white/20">
                                         <i class="fa-solid fa-user-doctor"></i>
                                     </div>
@@ -588,7 +561,6 @@
                             </span>
                         </div>
 
-                        <!-- Content blocks -->
                         <div class="space-y-4">
                             <div id="sect-mission">
                                 <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Missions Principales</span>
@@ -609,7 +581,6 @@
                         </div>
                     </div>
 
-                    <!-- Footer Details -->
                     <div id="detail-footer" class="border-t border-slate-100 pt-4 mt-6 flex items-center justify-between text-xs text-slate-400 font-semibold">
                         <span class="truncate">Axe : <strong id="detail-axe" class="text-slate-600">Tous Axes</strong></span>
                         <span id="detail-sec-protocol" class="text-tropical-500 font-bold bg-tropical-50 px-2.5 py-1 rounded-lg"></span>
@@ -619,7 +590,6 @@
 
         </div>
 
-        <!-- VIEW 2: FLOW SIMULATOR (No Photos, Text Only) -->
         <div id="view-flow" class="hidden bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6 transition-all duration-500">
             
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-slate-100 pb-4 gap-4">
@@ -654,7 +624,6 @@
                 </div>
             </div>
 
-            <!-- Flow Timeline Grid (Text Only) -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 
                 <div id="step-1" class="border border-slate-100 rounded-2xl p-5 bg-slate-50/50 text-center space-y-3 opacity-50 transition-all duration-500 flex flex-col justify-center">
@@ -682,7 +651,6 @@
                 </div>
             </div>
 
-            <!-- Immersive Feedback Analysis Box -->
             <div id="scen-observation-box" class="hidden bg-slate-50 rounded-3xl p-6 border border-slate-100 space-y-4 shadow-sm">
                 <h4 class="font-display font-extrabold text-sm text-slate-900 flex items-center gap-2">
                     <i class="fa-solid fa-clipboard-question text-tropical-500"></i> Analyse du Parcours & Conformité Numérique
@@ -697,23 +665,21 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-[#0c1810] text-slate-300 mt-12 py-10 border-t border-tropical-900">
         <div class="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-tropical-900 pb-6">
                 <div class="flex items-center space-x-3">
-                    <img src="logo centre de santé du boulevard 2.png" alt="Logo ACSB" class="h-10 w-10 object-contain rounded-full bg-white p-0.5" onerror="this.src='https://placehold.co/50x50/2D5F3F/FFFFFF?text=ACSB'">
+                    <img src="logo centre de sante du boulevard 2.png" alt="Logo ACSB" class="h-10 w-10 object-contain rounded-full bg-white p-0.5">
                     <span class="font-display font-bold text-xs tracking-wider uppercase text-white">Centre de Santé du Boulevard (ACSB)</span>
                 </div>
                 <div class="text-[11px] text-slate-400 font-semibold tracking-wider">ASSOCIATION CENTRE DE SANTÉ DU BOULEVARD — TOUS DROITS RÉSERVÉS © 2026</div>
             </div>
             <p class="text-[11px] text-slate-400 max-w-5xl leading-relaxed">
-                Le modèle d'exercice coordonné de l'ACSB est conçu en conformité stricte avec les exigences nationales de l'Agence du Numérique en Santé (ANS), les directives d'interopérabilité Ségur, la protection de la vie privée (RGPD - CNIL) et l'article R.4127-68 du Code de la Santé Publique encadrant la déontologie interprofessionnelle.
+                Le modèle d'exercice coordonné de l'ACSB est structuré en conformité stricte avec les exigences nationales de l'Agence du Numérique en Santé (ANS), les directives d'interopérabilité Ségur, la protection de la vie privée (RGPD - CNIL) et l'article R.4127-68 du Code de la Santé Publique encadrant la déontologie interprofessionnelle.
             </p>
         </div>
     </footer>
 
-    <!-- DATABASE & LOGIC CONTROLLER -->
     <script>
         // Database of clinic nodes. ALL actors now use icon classes exclusively.
         const actors = {
@@ -1501,7 +1467,7 @@
                 }
             }
 
-            // Update Dynamic Detail Pane (using icon wrapper fallback for all nodes)
+            // Update Dynamic Detail Pane
             if (data.portrait.startsWith('fa-')) {
                 let colorTheme = 'from-magenta-500 to-magenta-600';
                 if (data.level === 'Niveau 1') colorTheme = 'from-tropical-500 to-tropical-600';
