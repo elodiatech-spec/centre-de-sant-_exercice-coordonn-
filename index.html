@@ -522,7 +522,7 @@
                                             <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-head-side-virus"></i></span>
                                             <span class="font-bold text-sky-800 truncate">Soutien Psy</span>
                                         </button>
-                                        <button onclick="selectNode('depistagecancer')" id="node-depistagecancer" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
+                                        <button onclick="selectNode('depistagecancer')" id="node-depistagecancer" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-slate-100 rounded-xl text-left text-xs">
                                             <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-stethoscope"></i></span>
                                             <span class="font-bold text-sky-800 truncate">Dépist. Cancer</span>
                                         </button>
@@ -556,7 +556,7 @@
                                     <p id="detail-status" class="text-xs text-slate-500 font-semibold truncate leading-normal mt-0.5"></p>
                                 </div>
                             </div>
-                            <span id="detail-badge" class="px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full bg-slate-100 text-slate-600 flex-shrink-0 shadow-sm">
+                            <span id="detail-badge" class="px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full shadow-sm bg-slate-100 text-slate-600 flex-shrink-0">
                                 Niveau --
                             </span>
                         </div>
@@ -1510,7 +1510,7 @@
         function resetScenarioUI() {
             for (let i = 1; i <= 4; i++) {
                 const el = document.getElementById(`step-${i}`);
-                el.className = "border border-slate-100 rounded-2xl p-5 bg-slate-50/50 text-center space-y-3 opacity-50 transition-all duration-500 flex flex-col justify-center";
+                el.className = "border border-slate-100 rounded-2xl p-5 bg-slate-50/50 text-center space-y-3 opacity-50 transition-all duration-300 flex flex-col justify-center";
             }
             document.getElementById('step-1-text').innerHTML = "Sélectionnez un scénario ci-dessus.";
             document.getElementById('step-2-text').innerText = "-";
