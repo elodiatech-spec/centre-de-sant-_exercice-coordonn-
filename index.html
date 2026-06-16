@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACSB — Cartographie de l'Exercice Coordonné</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tropical: {
+                            50: '#f0f7f3',
+                            100: '#daebd1',
+                            200: '#bce1b4',
+                            500: '#2D5F3F', // Green tropical
+                            600: '#234a31',
+                            900: '#0f2015',
+                        },
+                        magenta: {
+                            50: '#fff0f5',
+                            100: '#ffdbeb',
+                            200: '#ffb3d7',
+                            500: '#E91E63', // Magenta
+                            600: '#c2114c',
+                            950: '#470016',
+                        },
+                        pale: {
+                            100: '#F8BBD0',
+                            200: '#f49ebc',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom premium scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Modern card hover effects */
+        .node-card {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* CCAS pulse matching premium standard */
+        .ccas-pulse-effect {
+            box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.5);
+            animation: pulse-purple-premium 2.5s infinite cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes pulse-purple-premium {
+            0% { box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(147, 51, 234, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(147, 51, 234, 0); }
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafb] text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-magenta-100 selection:text-magenta-600">
+
+    <!-- HEADER -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40 shadow-sm transition-all">
+        <div class="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <!-- Official Logo Integration -->
+                <div class="h-14 w-14 flex-shrink-0 relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-tropical-500 to-magenta-500 rounded-full blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    <img src="logo centre de santé du boulevard 2.png" alt="Logo ACSB" class="relative h-full w-full object-contain rounded-full bg-white shadow-inner" onerror="this.src='https://placehold.co/100x100/2D5F3F/FFFFFF?text=ACSB'">
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold font-display text-tropical-900 tracking-tight leading-none mb-1">Centre de Santé du Boulevard</h1>
+                    <p class="text-[11px] md:text-xs text-magenta-500 font-bold uppercase tracking-wider">La santé de proximité, au cœur des quartiers.</p>
+                </div>
+            </div>
+            
+            <!-- Tech/Compliance Indicators -->
+            <div class="hidden lg:flex items-center space-x-6 text-xs font-semibold">
+                <span class="flex items-center text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100/60 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
+                    Exercice Médical Coordonné
+                </span>
+                <span class="text-slate-400 font-medium">Centre de santé, Certifié</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN WRAPPER -->
+    <main class="flex-grow max-w-[1700px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+        
+        <!-- INTRO HERO PANEL -->
+        <div class="relative bg-gradient-to-br from-tropical-50 via-white to-magenta-50/70 rounded-3xl p-6 md:p-8 text-slate-800 overflow-hidden shadow-sm border border-slate-200">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(233,30,99,0.05),transparent_60%)]"></div>
+            
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Text Area -->
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="inline-block text-[10px] uppercase font-bold tracking-widest text-magenta-600 bg-magenta-50 px-3 py-1 rounded-full border border-magenta-100">
+                        Projet de Santé ACSB
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-bold font-display tracking-tight text-slate-900 leading-tight">
+                        Architecture Interactive de la Coordination
+                    </h2>
+                    <p class="text-slate-600 text-xs md:text-sm leading-relaxed max-w-3xl">
+                        Explorez l'architecture d'exercice coordonné du <strong>Centre de Santé du Boulevard</strong>. Découvrez les ressources internes de <strong>Niveau 1</strong> (équipe salariée), le réseau conventionné de <strong>Niveau 2</strong> (cliniciens, IPA externes et pharmacien partenaire), et les structures d'accès aux droits et de prévention de <strong>Niveau 3</strong>.
+                    </p>
+                    
+                    <!-- Navigation Tab Buttons & Website Link -->
+                    <div class="flex flex-wrap items-center gap-3 pt-2">
+                        <div class="flex flex-row sm:flex-nowrap gap-2 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 inline-flex shadow-inner">
+                            <button onclick="switchView('map')" id="btn-view-map" class="px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 bg-white text-tropical-900 shadow-md flex items-center gap-2">
+                                <i class="fa-solid fa-network-wired text-tropical-500"></i> Carte d'Architecture
+                            </button>
+                            <button onclick="switchView('flow')" id="btn-view-flow" class="px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 text-slate-600 hover:bg-slate-200 flex items-center gap-2">
+                                <i class="fa-solid fa-route text-magenta-500"></i> Simulateur de Parcours
+                            </button>
+                        </div>
+                        
+                        <!-- Direct link to the lovable app website -->
+                        <a href="https://centre-de-sante-du-boulevard.lovable.app" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 bg-magenta-500 text-white shadow-md hover:bg-magenta-600 hover:shadow-lg flex items-center gap-2 border border-magenta-600">
+                            <i class="fa-solid fa-globe"></i> Visiter le Site Web
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hero Photo Area (Uses fallback image ONLY in preview, will work locally) -->
+                <div class="hidden lg:flex lg:col-span-5 h-56 xl:h-64 items-center justify-center p-2">
+                    <img src="imagecdsenligne.jpg" alt="Accès au site du Centre de Santé du Boulevard" class="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105 rounded-xl shadow-lg border border-slate-200" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600'; this.classList.remove('object-contain'); this.classList.add('object-cover');">
+                </div>
+            </div>
+        </div>
+
+        <!-- VISUAL RISK / TRIAGE GUIDE -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-50 pb-3 gap-2">
+                <div>
+                    <h3 class="font-display font-extrabold text-sm text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Stratification & Triage : Les Niveaux de Risque Patient (1 à 4)
+                    </h3>
+                    <p class="text-[11px] text-slate-500">Visualisez et triez la patientèle du QPV selon les niveaux d'urgence du Projet de Santé.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- RISK 1 CARD (Urgence Vitale) -->
+                <div class="border border-red-100 rounded-2xl overflow-hidden bg-red-50/10 hover:shadow-md transition-all flex flex-col group">
+                    <div class="h-28 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-red-600/10 z-10"></div>
+                        <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full z-20 shadow animate-pulse">NIVEAU 1 — VITALE</span>
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=300" alt="Urgence vitale hospitalière" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-3 flex-grow flex flex-col justify-between space-y-2">
+                        <div>
+                            <h4 class="text-xs font-bold text-red-950 leading-tight">Urgence Vitale / Critique</h4>
+                            <p class="text-[10px] text-slate-500 leading-normal mt-1">Décompensation aiguë, détresse respiratoire, arrêt, suspicion d'AVC ou d'IDM immédiat.</p>
+                        </div>
+                        <div class="pt-2 border-t border-red-50 text-[10px] font-bold text-red-700 flex items-center justify-between">
+                            <span>Orientation : <strong>CHU La Meynard</strong></span>
+                            <i class="fa-solid fa-truck-medical"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RISK 2 CARD (Urgence Potentielle) -->
+                <div class="border border-orange-100 rounded-2xl overflow-hidden bg-orange-50/10 hover:shadow-md transition-all flex flex-col group">
+                    <div class="h-28 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-orange-500/10 z-10"></div>
+                        <span class="absolute top-3 left-3 bg-orange-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full z-20 shadow">NIVEAU 2 — POTENTIELLE</span>
+                        <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&q=80&w=300" alt="Constantes cliniques monitoring" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-3 flex-grow flex flex-col justify-between space-y-2">
+                        <div>
+                            <h4 class="text-xs font-bold text-orange-950 leading-tight">Vitale Potentielle / Instabilité</h4>
+                            <p class="text-[10px] text-slate-500 leading-normal mt-1">Constantes anormales (Tension > 180 mmHg, SpO2 < 92%), plaie diabétique infectée, détresse modérée.</p>
+                        </div>
+                        <div class="pt-2 border-t border-orange-50 text-[10px] font-bold text-orange-700 flex items-center justify-between">
+                            <span>Orientation : <strong>MG2 (SNP) & IDEL</strong></span>
+                            <i class="fa-solid fa-house-medical"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RISK 3 CARD (Chronique) -->
+                <div class="border border-yellow-200 rounded-2xl overflow-hidden bg-yellow-50/10 hover:shadow-md transition-all flex flex-col group">
+                    <div class="h-28 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-yellow-500/10 z-10"></div>
+                        <span class="absolute top-3 left-3 bg-yellow-500 text-slate-900 text-[10px] font-extrabold px-2.5 py-1 rounded-full z-20 shadow">NIVEAU 3 — CHRONIQUE</span>
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=300" alt="Consultation médecin patient" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-3 flex-grow flex flex-col justify-between space-y-2">
+                        <div>
+                            <h4 class="text-xs font-bold text-yellow-950 leading-tight">Chronique Complexe & Sociale</h4>
+                            <p class="text-[10px] text-slate-500 leading-normal mt-1">Patient ALD (Diabète/HTA) en retard de suivi, rupture de droits sociaux actifs, isolement du senior.</p>
+                        </div>
+                        <div class="pt-2 border-t border-yellow-100 text-[10px] font-bold text-yellow-800 flex items-center justify-between">
+                            <span>Orientation : <strong>MG1 / IPA / CCAS</strong></span>
+                            <i class="fa-solid fa-people-arrows"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RISK 4 CARD (Prévention) -->
+                <div class="border border-emerald-100 rounded-2xl overflow-hidden bg-emerald-50/10 hover:shadow-md transition-all flex flex-col group">
+                    <div class="h-28 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-emerald-500/10 z-10"></div>
+                        <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full z-20 shadow">NIVEAU 4 — BIEN-ÊTRE</span>
+                        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=300" alt="Prévention et bien-être" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-3 flex-grow flex flex-col justify-between space-y-2">
+                        <div>
+                            <h4 class="text-xs font-bold text-emerald-950 leading-tight">Prévention, Dépistage & ETP</h4>
+                            <p class="text-[10px] text-slate-500 leading-normal mt-1">Vaccination à jour, bilan d'âge clé (MBP), dépistages organisés du cancer, reconditionnement physique.</p>
+                        </div>
+                        <div class="pt-2 border-t border-emerald-50 text-[10px] font-bold text-emerald-700 flex items-center justify-between">
+                            <span>Orientation : <strong>Hub Prévention & ETP</strong></span>
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 1: INTERACTIVE ARCHITECTURE MAP -->
+        <div id="view-map" class="grid grid-cols-1 xl:grid-cols-12 gap-6 transition-all duration-500">
+            
+            <!-- LEFT AREA: Interactive Cards Grid -->
+            <div class="xl:col-span-8 space-y-6">
+                
+                <!-- LEVEL 1: INTERNAL SALARIED SOCKET -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative transition-all">
+                    <div class="flex items-center justify-between mb-4 border-b border-slate-50 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="flex h-6 w-6 rounded-lg bg-tropical-50 text-tropical-500 items-center justify-center text-xs font-bold shadow-sm">1</span>
+                            <h3 class="font-display font-extrabold text-sm text-slate-900 uppercase tracking-wider">
+                                Niveau 1 — Ressources Internes (Équipe Salariée & Gouvernance Initiale)
+                            </h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 font-medium italic">Accès DPI Complet</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <button onclick="selectNode('mg1')" id="node-mg1" class="node-btn node-card group flex items-center p-3 bg-white border border-slate-100 rounded-2xl text-left hover:border-tropical-500 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 h-1.5 w-12 bg-tropical-500 rounded-bl-lg"></div>
+                            <span class="h-11 w-11 rounded-xl bg-tropical-50 text-tropical-500 flex items-center justify-center text-lg mr-3 shadow-sm flex-shrink-0">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </span>
+                            <div class="overflow-hidden">
+                                <div class="text-xs font-bold text-slate-800 leading-snug truncate group-hover:text-tropical-500 transition-colors">MG 1 (Référent)</div>
+                                <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wide">Axe 1 Clinique</div>
+                            </div>
+                        </button>
+                        
+                        <button onclick="selectNode('mg2')" id="node-mg2" class="node-btn node-card group flex items-center p-3 bg-white border border-slate-100 rounded-2xl text-left hover:border-tropical-500 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 h-1.5 w-12 bg-tropical-500 rounded-bl-lg"></div>
+                            <span class="h-11 w-11 rounded-xl bg-tropical-50 text-tropical-500 flex items-center justify-center text-lg mr-3 shadow-sm flex-shrink-0">
+                                <i class="fa-solid fa-stethoscope"></i>
+                            </span>
+                            <div class="overflow-hidden">
+                                <div class="text-xs font-bold text-slate-800 leading-snug truncate group-hover:text-tropical-500 transition-colors">MG 2 (Prévention)</div>
+                                <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wide">Axe 2 Prévention</div>
+                            </div>
+                        </button>
+
+                        <button onclick="selectNode('am')" id="node-am" class="node-btn node-card group flex items-center p-3 bg-white border border-slate-100 rounded-2xl text-left hover:border-tropical-500 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 h-1.5 w-12 bg-tropical-500 rounded-bl-lg"></div>
+                            <span class="h-11 w-11 rounded-xl bg-tropical-50 text-tropical-500 flex items-center justify-center text-lg mr-3 shadow-sm flex-shrink-0">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                            </span>
+                            <div class="overflow-hidden">
+                                <div class="text-xs font-bold text-slate-800 leading-snug truncate group-hover:text-tropical-500 transition-colors">Assistante Méd.</div>
+                                <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wide">Triage & TROD</div>
+                            </div>
+                        </button>
+
+                        <button onclick="selectNode('coord')" id="node-coord" class="node-btn node-card group flex items-center p-3 bg-white border border-slate-100 rounded-2xl text-left hover:border-tropical-500 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 h-1.5 w-12 bg-tropical-500 rounded-bl-lg"></div>
+                            <span class="h-11 w-11 rounded-xl bg-tropical-50 text-tropical-500 flex items-center justify-center text-lg mr-3 shadow-sm flex-shrink-0">
+                                <i class="fa-solid fa-user-gear"></i>
+                            </span>
+                            <div class="overflow-hidden">
+                                <div class="text-xs font-bold text-slate-800 leading-snug truncate group-hover:text-tropical-500 transition-colors">Coordinatrice</div>
+                                <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wide">M+9 — Pivot</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LEVEL 2: EXTERNAL CLINICAL PARTNERS -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative transition-all">
+                    <div class="flex items-center justify-between mb-4 border-b border-slate-50 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="flex h-6 w-6 rounded-lg bg-magenta-50 text-magenta-500 items-center justify-center text-xs font-bold shadow-sm">2</span>
+                            <h3 class="font-display font-extrabold text-sm text-slate-900 uppercase tracking-wider">
+                                Niveau 2 — Ressources Externes (Réseau Clinique & Paramédical Conventionné)
+                            </h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 font-medium italic">Accès DPI Restreint / MSSanté</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <button onclick="selectNode('ipa')" id="node-ipa" class="node-btn node-card group flex items-center p-4 bg-rose-50/40 border border-magenta-100 hover:border-magenta-500 rounded-2xl text-left relative overflow-hidden">
+                            <div class="absolute top-0 right-0 h-2 w-16 bg-magenta-500"></div>
+                            <span class="h-12 w-12 rounded-xl bg-magenta-100 text-magenta-600 flex items-center justify-center text-xl mr-3 border border-magenta-200 shadow-sm flex-shrink-0">
+                                <i class="fa-solid fa-user-nurse"></i>
+                            </span>
+                            <div>
+                                <h4 class="text-xs font-bold text-magenta-950 group-hover:text-magenta-600 transition-colors">IPA (externe) — CONVENTION</h4>
+                                <p class="text-[10px] text-slate-500 font-semibold leading-tight">Hub Santé Clinique (Suivi stables DT2/HTA & ETP)</p>
+                            </div>
+                        </button>
+
+                        <button onclick="selectNode('cypria')" id="node-cypria" class="node-btn node-card group flex items-center p-4 bg-emerald-50/40 border border-emerald-100 hover:border-emerald-600 rounded-2xl text-left relative overflow-hidden">
+                            <div class="absolute top-0 right-0 h-2 w-16 bg-emerald-600"></div>
+                            <span class="h-12 w-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mr-3 border border-emerald-200 shadow-sm flex-shrink-0">
+                                <i class="fa-solid fa-prescription-bottle-medical"></i>
+                            </span>
+                            <div>
+                                <h4 class="text-xs font-bold text-emerald-950 group-hover:text-emerald-600 transition-colors">M. David Cypria (Pharmacien)</h4>
+                                <p class="text-[10px] text-slate-500 font-semibold leading-tight">Gouvernance (Président) & Officine de liaison</p>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                        <button onclick="selectNode('idel')" id="node-idel" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-syringe"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">IDEL</span>
+                        </button>
+                        <button onclick="selectNode('sf')" id="node-sf" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-baby"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Sage-femme</span>
+                        </button>
+                        <button onclick="selectNode('pod')" id="node-pod" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-shoe-prints"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Pédicure-Pod.</span>
+                        </button>
+                        <button onclick="selectNode('psy')" id="node-psy" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-brain"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Psychologue</span>
+                        </button>
+                        <button onclick="selectNode('diet')" id="node-diet" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-apple-whole"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Diététicienne</span>
+                        </button>
+                        <button onclick="selectNode('mk')" id="node-mk" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-hands-holding"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Kinésithérap.</span>
+                        </button>
+                        <button onclick="selectNode('lab')" id="node-lab" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-flask"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Bio-Pôle Lab</span>
+                        </button>
+                        <button onclick="selectNode('gyno')" id="node-gyno" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-venus"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Gynécologue</span>
+                        </button>
+                        <button onclick="selectNode('dent')" id="node-dent" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-tooth"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Dentistes</span>
+                        </button>
+                        <button onclick="selectNode('ophtalmo')" id="node-ophtalmo" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-eye"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Ophtalmo</span>
+                        </button>
+                        <button onclick="selectNode('predescu')" id="node-predescu" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-x-ray"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">Dr Predescu</span>
+                        </button>
+                        <button onclick="selectNode('had')" id="node-had" class="node-btn node-card group flex items-center p-2.5 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                            <span class="h-8 w-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 border border-slate-200">
+                                <i class="fa-solid fa-house-medical"></i></span>
+                            <span class="font-bold text-slate-700 leading-tight truncate">HAD / SSIAD</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LEVEL 3: SEPARATED HUBS (SOCIAL & PREVENTION) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- LEVEL 3A: HUB SOCIAL (Accès aux Droits) -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4 border-b border-slate-50 pb-3">
+                                <div class="flex items-center space-x-3">
+                                    <span class="flex h-6 w-6 rounded-lg bg-purple-50 text-purple-600 items-center justify-center text-xs font-bold shadow-sm">3A</span>
+                                    <h3 class="font-display font-extrabold text-xs text-slate-900 uppercase tracking-wider">Niveau 3A — Hub Social (Droits)</h3>
+                                </div>
+                                <span class="text-[10px] text-slate-400 font-medium italic">Fiche Médico-Sociale</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <button onclick="selectNode('ccas')" id="node-ccas" class="node-btn node-card w-full flex items-center p-4 bg-purple-50/50 border-2 border-purple-300 hover:border-purple-600 rounded-2xl text-left relative overflow-hidden ccas-pulse-effect">
+                                    <div class="absolute top-0 right-0 h-2 w-20 bg-purple-600"></div>
+                                    <span class="h-12 w-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mr-3 border border-purple-200 shadow-sm flex-shrink-0">
+                                        <i class="fa-solid fa-handshake-angle"></i>
+                                    </span>
+                                    <div class="overflow-hidden">
+                                        <div class="text-xs font-bold text-purple-950 leading-snug flex items-center gap-1.5">
+                                            CCAS Fort-de-France <span class="bg-purple-600 text-white text-[8px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Lien Direct Pivot</span>
+                                        </div>
+                                        <div class="text-[10px] text-purple-700 font-semibold leading-tight mt-0.5">Interlocuteur unique d'orientation vers l'aide sociale foyalaise</div>
+                                    </div>
+                                </button>
+                                
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button onclick="selectNode('cpam')" id="node-cpam" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                        <span class="h-6 w-6 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-shield-halved"></i></span>
+                                        <span class="font-bold text-slate-700 leading-tight truncate">CPAM / CGSS</span>
+                                    </button>
+                                    <button onclick="selectNode('acise')" id="node-acise" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                        <span class="h-6 w-6 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-briefcase"></i></span>
+                                        <span class="font-bold text-slate-700 leading-tight truncate">ACISE</span>
+                                    </button>
+                                    <button onclick="selectNode('croixrouge')" id="node-croixrouge" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                        <span class="h-6 w-6 rounded-lg bg-red-50 text-red-600 flex items-center justify-center mr-2 text-[10px] border border-red-100"><i class="fa-solid fa-plus"></i></span>
+                                        <span class="font-bold text-slate-700 leading-tight truncate">Croix-Rouge</span>
+                                    </button>
+                                    <button onclick="selectNode('caf')" id="node-caf" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                        <span class="h-6 w-6 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-people-roof"></i></span>
+                                        <span class="font-bold text-slate-700 leading-tight truncate">CAF Martinique</span>
+                                    </button>
+                                    <button onclick="selectNode('ml')" id="node-ml" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                        <span class="h-6 w-6 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-graduation-cap"></i></span>
+                                        <span class="font-bold text-slate-700 leading-tight truncate">Mission Locale</span>
+                                    </button>
+                                    <button onclick="selectNode('ft')" id="node-ft" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                        <span class="h-6 w-6 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-person-digging"></i></span>
+                                        <span class="font-bold text-slate-700 leading-tight truncate">France Travail</span>
+                                    </button>
+                                    <button onclick="selectNode('retraite')" id="node-retraite" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs col-span-2">
+                                        <span class="h-6 w-6 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-person-cane"></i></span>
+                                        <span class="font-bold text-slate-700 leading-tight truncate">CGSS Assurance Retraite</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LEVEL 3B: HUB PREVENTION & INTEGRATED CLINICAL DEVICES -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4 border-b border-slate-50 pb-3">
+                                <div class="flex items-center space-x-3">
+                                    <span class="flex h-6 w-6 rounded-lg bg-sky-50 text-sky-600 items-center justify-center text-xs font-bold shadow-sm">3B</span>
+                                    <h3 class="font-display font-extrabold text-xs text-slate-900 uppercase tracking-wider">Niveau 3B — Hub Prévention</h3>
+                                </div>
+                                <span class="text-[10px] text-slate-400 font-medium italic">Prévention Primaire</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="space-y-1.5">
+                                    <span class="text-[9px] font-bold text-sky-600 uppercase tracking-wider block">Partenaires Institutionnels</span>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <button onclick="selectNode('crcdc')" id="node-crcdc" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-ribbon"></i></span>
+                                            <span class="font-bold text-slate-700 truncate">CRCDC (Cancer)</span>
+                                        </button>
+                                        <button onclick="selectNode('saphyr')" id="node-saphyr" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-person-running"></i></span>
+                                            <span class="font-bold text-slate-700 truncate">SAPHYR 972</span>
+                                        </button>
+                                        <button onclick="selectNode('pmi')" id="node-pmi" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-children"></i></span>
+                                            <span class="font-bold text-slate-700 truncate">PMI Martinique</span>
+                                        </button>
+                                        <button onclick="selectNode('cegidd')" id="node-cegidd" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-vials"></i></span>
+                                            <span class="font-bold text-slate-700 truncate">CeGIDD</span>
+                                        </button>
+                                        <button onclick="selectNode('csapa')" id="node-csapa" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-pills"></i></span>
+                                            <span class="font-bold text-slate-700 truncate">CSAPA/CAARUD</span>
+                                        </button>
+                                        <button onclick="selectNode('ireps')" id="node-ireps" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-chalkboard-user"></i></span>
+                                            <span class="font-bold text-slate-700 truncate">IREPS</span>
+                                        </button>
+                                        <button onclick="selectNode('afd')" id="node-afd" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-droplet"></i></span>
+                                            <span class="font-bold text-slate-700 truncate">AFD 972</span>
+                                        </button>
+                                        <button onclick="selectNode('cpamprev')" id="node-cpamprev" class="node-btn node-card flex items-center p-2 bg-white border border-slate-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-slate-100 text-slate-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-heart-pulse"></i></span>
+                                            <span class="font-bold text-slate-700 truncate">CPAM Prév.</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-1.5 pt-3 border-t border-sky-50">
+                                    <span class="text-[9px] font-bold text-sky-600 uppercase tracking-wider block">Dispositifs Cliniques de Prévention</span>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <button onclick="selectNode('mrtc')" id="node-mrtc" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-weight-scale"></i></span>
+                                            <span class="font-bold text-sky-800 truncate">Retrouve Cap</span>
+                                        </button>
+                                        <button onclick="selectNode('mbp')" id="node-mbp" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-clipboard-check"></i></span>
+                                            <span class="font-bold text-sky-800 truncate">Bilan Prev</span>
+                                        </button>
+                                        <button onclick="selectNode('chlordecone')" id="node-chlordecone" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-leaf"></i></span>
+                                            <span class="font-bold text-sky-800 truncate">Chlordécone</span>
+                                        </button>
+                                        <button onclick="selectNode('cssj')" id="node-cssj" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-venus-mars"></i></span>
+                                            <span class="font-bold text-sky-800 truncate">Santé Sexuelle</span>
+                                        </button>
+                                        <button onclick="selectNode('monsoutienpsy')" id="node-monsoutienpsy" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-head-side-virus"></i></span>
+                                            <span class="font-bold text-sky-800 truncate">Soutien Psy</span>
+                                        </button>
+                                        <button onclick="selectNode('depistagecancer')" id="node-depistagecancer" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs">
+                                            <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-stethoscope"></i></span>
+                                            <span class="font-bold text-sky-800 truncate">Dépist. Cancer</span>
+                                        </button>
+                                        <button onclick="selectNode('vaccin')" id="node-vaccin" class="node-btn node-card flex items-center p-2 bg-sky-50/50 border border-sky-100 rounded-xl text-left text-xs col-span-2">
+                                            <span class="h-6 w-6 rounded bg-sky-100 text-sky-600 flex items-center justify-center mr-2 text-[10px]"><i class="fa-solid fa-syringe"></i></span>
+                                            <span class="font-bold text-sky-800 text-center w-full block truncate">Vaccinations & Rattrapages</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT AREA: Dynamic Details Sidebar Card -->
+            <div class="xl:col-span-4 flex flex-col space-y-6">
+                <!-- Info Display Card -->
+                <div id="details-card" class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm flex-grow flex flex-col justify-between sticky top-24 transition-all duration-300">
+                    <div>
+                        <!-- Header with dynamic icon container -->
+                        <div class="flex items-start justify-between border-b border-slate-100 pb-4 mb-4">
+                            <div class="flex items-center space-x-3 overflow-hidden">
+                                <div id="detail-portrait-container" class="relative flex-shrink-0">
+                                    <div class="relative h-14 w-14 rounded-2xl bg-gradient-to-tr from-tropical-500 to-tropical-600 flex items-center justify-center text-white text-xl shadow-md border border-white/20">
+                                        <i class="fa-solid fa-user-doctor"></i>
+                                    </div>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <h4 id="detail-name" class="font-display font-extrabold text-base text-slate-900 leading-snug truncate">Sélectionnez un acteur</h4>
+                                    <p id="detail-status" class="text-xs text-slate-500 font-semibold truncate leading-normal mt-0.5"></p>
+                                </div>
+                            </div>
+                            <span id="detail-badge" class="px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full bg-slate-100 text-slate-600 flex-shrink-0 shadow-sm">
+                                Niveau --
+                            </span>
+                        </div>
+
+                        <!-- Content blocks -->
+                        <div class="space-y-4">
+                            <div id="sect-mission">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Missions Principales</span>
+                                <div id="detail-mission" class="text-xs md:text-sm text-slate-600 mt-1.5 space-y-2 leading-relaxed">
+                                    Veuillez cliquer sur un acteur clinique, médico-social ou un dispositif de la carte pour analyser en détail son rôle, ses modalités d'échange et ses publics cibles.
+                                </div>
+                            </div>
+
+                            <div id="sect-modalites" class="hidden">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Modalités & Canaux de Coordination</span>
+                                <div id="detail-modalites" class="text-xs text-slate-600 mt-1.5 bg-slate-50 p-3 rounded-2xl border border-slate-100 leading-relaxed font-medium"></div>
+                            </div>
+
+                            <div id="sect-public" class="hidden">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Publics Cibles & Objectifs</span>
+                                <p id="detail-public" class="text-xs text-magenta-600 font-bold mt-1.5 leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Details -->
+                    <div id="detail-footer" class="border-t border-slate-100 pt-4 mt-6 flex items-center justify-between text-xs text-slate-400 font-semibold">
+                        <span class="truncate">Axe : <strong id="detail-axe" class="text-slate-600">Tous Axes</strong></span>
+                        <span id="detail-sec-protocol" class="text-tropical-500 font-bold bg-tropical-50 px-2.5 py-1 rounded-lg"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- VIEW 2: FLOW SIMULATOR (No Photos, Text Only) -->
+        <div id="view-flow" class="hidden bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6 transition-all duration-500">
+            
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-slate-100 pb-4 gap-4">
+                <div class="space-y-1">
+                    <h3 class="text-lg md:text-xl font-bold font-display text-tropical-900 flex items-center gap-2">
+                        <i class="fa-solid fa-route text-magenta-500"></i> Simulateur Opérationnel de Parcours Patients
+                    </h3>
+                    <p class="text-xs text-slate-500 font-medium">Visualisez comment l'exercice coordonné résout concrètement les ruptures de soins d'un patient du QPV.</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="runScenario('scen-diabetes')" class="px-4 py-2.5 bg-tropical-50 border border-tropical-100 text-tropical-500 rounded-xl text-xs font-bold hover:bg-tropical-100 transition-all flex items-center gap-2 shadow-sm">
+                        <span class="flex items-center gap-1">
+                            <i class="fa-solid fa-droplet text-red-500"></i>
+                            <i class="fa-solid fa-id-card-clip text-purple-500"></i>
+                        </span>
+                        Diabète & Rupture de Droits (Axe 1)
+                    </button>
+                    <button onclick="runScenario('scen-maternity')" class="px-4 py-2.5 bg-magenta-50 border border-magenta-100 text-magenta-500 rounded-xl text-xs font-bold hover:bg-magenta-100 transition-all flex items-center gap-2 shadow-sm">
+                        <span class="flex items-center gap-1">
+                            <i class="fa-solid fa-person-pregnant text-magenta-500"></i>
+                            <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+                        </span>
+                        Grossesse & Précarité (Axe 3)
+                    </button>
+                    <button onclick="runScenario('scen-geriatric')" class="px-4 py-2.5 bg-blue-50 border border-blue-100 text-blue-600 rounded-xl text-xs font-bold hover:bg-blue-100 transition-all flex items-center gap-2 shadow-sm">
+                        <span class="flex items-center gap-1">
+                            <i class="fa-solid fa-person-cane text-blue-600"></i>
+                            <i class="fa-solid fa-hospital-user text-sky-600"></i>
+                        </span>
+                        Retour d'Hospit. & Seniors (Axe 1 & 2)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Flow Timeline Grid (Text Only) -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                
+                <div id="step-1" class="border border-slate-100 rounded-2xl p-5 bg-slate-50/50 text-center space-y-3 opacity-50 transition-all duration-500 flex flex-col justify-center">
+                    <div class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-slate-200 text-slate-600 font-extrabold mb-1 shadow-inner text-sm mx-auto">1</div>
+                    <h4 class="font-display font-extrabold text-xs text-slate-900 uppercase tracking-wider">Accueil & Triage (Niveau 1)</h4>
+                    <p id="step-1-text" class="text-xs text-slate-500 leading-relaxed text-center">Sélectionnez un scénario ci-dessus.</p>
+                </div>
+
+                <div id="step-2" class="border border-slate-100 rounded-2xl p-5 bg-slate-50/50 text-center space-y-3 opacity-50 transition-all duration-500 flex flex-col justify-center">
+                    <div class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-slate-200 text-slate-600 font-extrabold mb-1 shadow-inner text-sm mx-auto">2</div>
+                    <h4 class="font-display font-extrabold text-xs text-slate-900 uppercase tracking-wider">Prise en Charge (Niveau 1)</h4>
+                    <p id="step-2-text" class="text-xs text-slate-500 leading-relaxed text-center">-</p>
+                </div>
+
+                <div id="step-3" class="border border-slate-100 rounded-2xl p-5 bg-slate-50/50 text-center space-y-3 opacity-50 transition-all duration-500 flex flex-col justify-center">
+                    <div class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-slate-200 text-slate-600 font-extrabold mb-1 shadow-inner text-sm mx-auto">3</div>
+                    <h4 class="font-display font-extrabold text-xs text-slate-900 uppercase tracking-wider">Relais Clinique (Niveau 2)</h4>
+                    <p id="step-3-text" class="text-xs text-slate-500 leading-relaxed text-center">-</p>
+                </div>
+
+                <div id="step-4" class="border border-slate-100 rounded-2xl p-5 bg-slate-50/50 text-center space-y-3 opacity-50 transition-all duration-500 flex flex-col justify-center">
+                    <div class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-slate-200 text-slate-600 font-extrabold mb-1 shadow-inner text-sm mx-auto">4</div>
+                    <h4 class="font-display font-extrabold text-xs text-slate-900 uppercase tracking-wider">Hub Social & Prév (Niveau 3)</h4>
+                    <p id="step-4-text" class="text-xs text-slate-500 leading-relaxed text-center">-</p>
+                </div>
+            </div>
+
+            <!-- Immersive Feedback Analysis Box -->
+            <div id="scen-observation-box" class="hidden bg-slate-50 rounded-3xl p-6 border border-slate-100 space-y-4 shadow-sm">
+                <h4 class="font-display font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-clipboard-question text-tropical-500"></i> Analyse du Parcours & Conformité Numérique
+                </h4>
+                <p id="scen-observation-text" class="text-xs md:text-sm text-slate-600 leading-relaxed"></p>
+                <div id="scen-technical-sec" class="flex flex-wrap items-center gap-6 pt-3 border-t border-slate-200 text-xs font-semibold">
+                    <span class="flex items-center text-slate-500 gap-1.5"><i class="fa-solid fa-shield text-emerald-500"></i> RGPD : <strong id="scen-rgpd" class="text-slate-800">Conforme</strong></span>
+                    <span class="flex items-center text-slate-500 gap-1.5"><i class="fa-solid fa-hard-drive text-emerald-500"></i> Système d'Information : <strong id="scen-si" class="text-slate-800">DPI Ségur + DMP + MSSanté</strong></span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0c1810] text-slate-300 mt-12 py-10 border-t border-tropical-900">
+        <div class="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-tropical-900 pb-6">
+                <div class="flex items-center space-x-3">
+                    <img src="logo centre de santé du boulevard 2.png" alt="Logo ACSB" class="h-10 w-10 object-contain rounded-full bg-white p-0.5" onerror="this.src='https://placehold.co/50x50/2D5F3F/FFFFFF?text=ACSB'">
+                    <span class="font-display font-bold text-xs tracking-wider uppercase text-white">Centre de Santé du Boulevard (ACSB)</span>
+                </div>
+                <div class="text-[11px] text-slate-400 font-semibold tracking-wider">ASSOCIATION CENTRE DE SANTÉ DU BOULEVARD — TOUS DROITS RÉSERVÉS © 2026</div>
+            </div>
+            <p class="text-[11px] text-slate-400 max-w-5xl leading-relaxed">
+                Le modèle d'exercice coordonné de l'ACSB est conçu en conformité stricte avec les exigences nationales de l'Agence du Numérique en Santé (ANS), les directives d'interopérabilité Ségur, la protection de la vie privée (RGPD - CNIL) et l'article R.4127-68 du Code de la Santé Publique encadrant la déontologie interprofessionnelle.
+            </p>
+        </div>
+    </footer>
+
+    <!-- DATABASE & LOGIC CONTROLLER -->
+    <script>
+        // Database of clinic nodes. ALL actors now use icon classes exclusively.
+        const actors = {
+            mg1: {
+                name: "Médecin Généraliste n°1 (Référent)",
+                level: "Niveau 1",
+                badgeClass: "bg-tropical-100 text-tropical-900 border border-tropical-200",
+                portrait: "fa-solid fa-user-doctor",
+                status: "Salarié CDI — 100% ETP — Référent Axe 1",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Assure les consultations de premier recours et l'attribution de Médecin Traitant pour la patientèle du QPV.</li>
+                        <li><strong>Référent clinique de l'Axe 1 (Diabète/HTA) :</strong> pilote la cohorte active de patients chroniques.</li>
+                        <li>Préside et anime les Réunions de Concertation Pluriprofessionnelles (RCP) hebdomadaires.</li>
+                        <li><strong>Transition opérationnelle :</strong> gère le pilotage clinique et la coordination en binôme avec l'AM de M0 à M9 (avant l'embauche de la coordinatrice).</li>
+                    </ul>`,
+                modalites: "Dossier Patient Informatisé (DPI) Doctolib Centre de Santé (Ségur), alimentation du DMP, échanges sécurisés via MSSanté.",
+                public: "Patients chroniques complexes (ALD), patients diabétiques, hypertendus du centre-ville foyalais.",
+                axe: "Axe 1 (Diabète & HTA)",
+                protocol: "Garant du projet de santé"
+            },
+            mg2: {
+                name: "Médecin Généraliste n°2",
+                level: "Niveau 1",
+                badgeClass: "bg-tropical-100 text-tropical-900 border border-tropical-200",
+                portrait: "fa-solid fa-stethoscope",
+                status: "Salarié CDI — 100% ETP — Référent Axe 2",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Consultations de premier recours et gestion des Soins Non Programmés (SNP) en coordination avec l'AM.</li>
+                        <li><strong>Référent Prévention de l'Axe 2 :</strong> Planification et mise en œuvre des 12 actions annuelles (rattrapages vaccinaux, ateliers, etc.).</li>
+                        <li>Supervise les internes et externes de l'UFR Santé Antilles.</li>
+                        <li>Intervient activement dans la Permanence des Soins Ambulatoires (PDSA).</li>
+                    </ul>`,
+                modalites: "Agenda Doctolib partagé pour la régulation des SNP. DPI partagé. MSSanté pour coordination avec la PMI et le CeGIDD.",
+                public: "Demandeurs de SNP, migrants du QPV, adolescents, enfants (pédiatrie de base).",
+                axe: "Axe 2 (Prévention)",
+                protocol: "DPI Partagé Doctolib"
+            },
+            am: {
+                name: "Assistante Médicale (CQP)",
+                level: "Niveau 1",
+                badgeClass: "bg-tropical-100 text-tropical-900 border border-tropical-200",
+                portrait: "fa-solid fa-heart-pulse",
+                status: "Salariée CDI — 100% ETP — Accueil & Box technique",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li><strong>Accueil bilingue (Français/Créole) :</strong> premier contact physique, orientation et triage.</li>
+                        <li>Réalisation de la préconsultation technique (PROTO-AM-01) : relevé TA, SpO2, glycémie capillaire, ECG, biométrie, TROD.</li>
+                        <li>Vérification administrative des droits (C2S, AME) et accompagnement actif à la création de Mon Espace Santé (DMP).</li>
+                        <li><strong>Transition M0-M9 :</strong> Assure la préparation des dossiers RCP avec le MG Référent.</li>
+                    </ul>`,
+                modalites: "Doctolib Agenda et Dossier Médical, AmeliPro (droits CPAM), module Télésuivi.",
+                public: "Ensemble de la file active du centre de santé, public à risque de fracture numérique.",
+                axe: "Tous Axes (Transversal)",
+                protocol: "Protocole PROTO-AM-01"
+            },
+            coord: {
+                name: "Coordinatrice de Santé",
+                level: "Niveau 1",
+                badgeClass: "bg-tropical-100 text-tropical-900 border border-tropical-200",
+                portrait: "fa-solid fa-user-gear",
+                status: "Salariée CDI — Embauche à M+9",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li><strong>Pivot de l'ACSB :</strong> anime et coordonne l'équipe pluriprofessionnelle interne et externe.</li>
+                        <li>Gère les aspects administratifs et financiers de l'association (reporting indicateurs ACI/ARS).</li>
+                        <li>Installe et pilote les conventions de Niveau 2 et 3 (CCAS, Calmette, CHU).</li>
+                        <li>Assure le rôle de Référente Protection des Données (DPO/RPD conforme à l'Article 29 des statuts).</li>
+                    </ul>`,
+                modalites: "Aucun accès aux dossiers cliniques individuels. Pilotage via tableaux de bord de coordination anonymisés, module ACI CPAM.",
+                public: "Indicateurs globaux de la file active, conformité RGPD de la structure.",
+                axe: "Tous Axes (Gouvernance)",
+                protocol: "DPO Conventionnelle"
+            },
+            ipa: {
+                name: "IPA (externe) — CONVENTION (Hub Santé & Prévention)",
+                level: "Niveau 2",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                portrait: "fa-solid fa-user-nurse",
+                status: "Partenaire Externe Conventionné (Année 2) — Hub Santé",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li><strong>Hub Santé Chronique stable :</strong> assure le suivi régulier des pathologies stabilisées (Diabète type 2, HTA) sous cadre de délégation (PROTO-IPA-01 à 05).</li>
+                        <li>Co-anime activement les ateliers collectifs d'Éducation Thérapeutique (ETP) de l'Axe 1 et 2.</li>
+                        <li>Réalise des actions de dépistage orienté (addictions, isolement gériatrique).</li>
+                        <li><strong>Raccordement SI :</strong> raccordé au DPI Doctolib sur dossier partagé et transmission asynchrone sécurisée via MSSanté.</li>
+                    </ul>`,
+                modalites: "DPI Doctolib (droits d'écriture partielle limités aux protocoles), DMP, MSSanté.",
+                public: "Patients atteints de DT2 ou d'HTA cliniquement stabilisés.",
+                axe: "Axes 1 et 2 (Chronique / Prévention)",
+                protocol: "PROTO-IPA-01 à 05 (Hub Santé)"
+            },
+            cypria: {
+                name: "M. David Antoine CYPRIA (Président / Pharmacien)",
+                level: "Niveau 2",
+                badgeClass: "bg-emerald-100 text-emerald-950 border border-emerald-200",
+                portrait: "fa-solid fa-prescription-bottle-medical",
+                status: "Bénévolat de Gouvernance & Officine de Liaison",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li><strong>Bénévolat de gouvernance :</strong> préside l'Association ACSB. N'exerce aucune activité rémunérée au sein du CDS.</li>
+                        <li><strong>Partenariat d'officine :</strong> pharmacien d'officine externe conventionné pour sécuriser le retour d'hospitalisation complexe (J+5).</li>
+                        <li>Co-animation des actions de prévention et de pharmacovigilance (bon usage, conciliation).</li>
+                        <li><strong>Garant déontologique (Art. R.4127-68 du CSP) :</strong> Libre choix de l'officine inconditionnel, fiches d'affichage réglementaires, interdiction de compérage.</li>
+                    </ul>`,
+                modalites: "Convention de coordination. Échanges exclusifs via MSSanté sécurisée pour la conciliation médicamenteuse. Pas d'accès direct au DPI.",
+                public: "Patients polymédiqués, femmes enceintes, retours d'hospitalisation complexes.",
+                axe: "Axe 1 et Axe 2",
+                protocol: "Convention Art. R.4127-68"
+            },
+            idel: {
+                name: "Cabinet d'Infirmiers Libéraux (IDEL)",
+                level: "Niveau 2",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                portrait: "fa-solid fa-syringe",
+                status: "Partenaires Libéraux Externes Conventionnés",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Assurent les soins infirmiers quotidiens à domicile (injections d'insuline, pansements complexes).</li>
+                        <li>Surveillent l'observance thérapeutique au domicile et l'évolution des constantes (Glycémie, TA).</li>
+                        <li>Suivi post-hospitalisation immédiat (Dispositif PRADO).</li>
+                        <li>Transmettent les alertes d'instabilité clinique au centre de santé.</li>
+                    </ul>`,
+                modalites: "Échanges via MSSanté. Accès dérogatoire et sécurisé au DPI Doctolib restreint à la file active de patients communs (écriture de constantes).",
+                public: "Patients dépendants, patients chroniques isolés, retours d'hospitalisation chirurgicale.",
+                axe: "Axe 1 et Axe 3",
+                protocol: "BSI & PRADO"
+            },
+            sf: {
+                name: "Sage-femme libérale",
+                level: "Niveau 2",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                portrait: "fa-solid fa-baby",
+                status: "Partenaire Libérale Externe Conventionnée (Année 1)",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Suivi de grossesse de bas risque, déclaration, planification de l'Entretien Prénatal Précoce (EPP).</li>
+                        <li>Suivi gynécologique préventif complet (contraception, réalisation de frottis de dépistage).</li>
+                        <li>Prise en charge à domicile post-partum (Dispositif PRADO maternité) et aide à l'allaitement.</li>
+                    </ul>`,
+                modalites: "Convention de coordination, MSSanté pour transmission du dossier obstétrical et courriers de liaison vers la maternité PZQ.",
+                public: "Femmes enceintes du QPV, jeunes mères isolées, femmes en âge de procréer.",
+                axe: "Axe 3 (Périnatalité)",
+                protocol: "PRADO Maternité"
+            },
+            pod: {
+                name: "Pédicure-podologue",
+                level: "Niveau 2",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                portrait: "fa-solid fa-shoe-prints",
+                status: "Partenaire Libéral Externe Conventionné (Année 1)",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Réalisation du bilan annuel de gradation du risque podologique chez le patient diabétique (Grades 1, 2 et 3).</li>
+                        <li>Soins de prévention, d'hygiène et traitement des fentes/lésions pour éviter l'amputation.</li>
+                        <li>Éducation du patient aux techniques d'auto-inspection des pieds à domicile.</li>
+                    </ul>`,
+                modalites: "Convention de partenariat. Prescription médicale du médecin du centre pour déclenchement du Forfait POD (remboursé 100%). Retour CR via MSSanté.",
+                public: "Patients diabétiques de type 2 de la file active.",
+                axe: "Axe 1 (Diabète/HTA)",
+                protocol: "Forfait POD Grades 1-3"
+            },
+            psy: {
+                name: "Psychologue clinicienne",
+                level: "Niveau 2",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                portrait: "fa-solid fa-brain",
+                status: "Partenaire Libérale Externe Conventionnée (Année 1-2)",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Soutien psychologique de proximité et accompagnement des syndromes anxio-dépressifs légers à modérés.</li>
+                        <li>Prise en charge du psycho-trauma et de la souffrance liée à l'exil/précarité.</li>
+                        <li>Dépistage précoce de la dépression post-partum en coordination avec la sage-femme.</li>
+                    </ul>`,
+                modalites: "Conventionnement dans le dispositif national 'Mon Soutien Psy'. Adressage écrit. CR de fin de prise en charge transmis par MSSanté.",
+                public: "Adultes et adolescents en détresse psychique, mères isolées (score PHQ-9 >= 10).",
+                axe: "Axe 2 et Axe 3",
+                protocol: "Mon Soutien Psy (Ameli)"
+            },
+            diet: {
+                name: "Diététicienne",
+                level: "Niveau 2",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                portrait: "fa-solid fa-apple-whole",
+                status: "Partenaire Externe Conventionnée (Année 1) — Diététicienne",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Consultation nutritionnelle et rééquilibrage diététique pour la prise en charge du diabète et de l'obésité.</li>
+                        <li>Co-animation des ateliers collectifs d'Éducation Thérapeutique (ETP) de l'Axe 1.</li>
+                        <li>Élaboration de livrets conseils intégrant les habitudes culinaires antillaises (légumes pays, fruits locaux).</li>
+                    </ul>`,
+                modalites: "Convention de coordination, messagerie sécurisée MSSanté pour la transmission des bilans biologiques nutritionnels de départ.",
+                public: "Diabétiques de type 2, hypertendus, enfants en surpoids (Dispositif Retrouve Ton Cap).",
+                axe: "Axes 1 et 2",
+                protocol: "Mon Parcours Accompagné"
+            },
+            mk: {
+                name: "Masseur-Kinésithérapeute",
+                level: "Niveau 2",
+                portrait: "fa-solid fa-hands-holding",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                status: "Partenaire Libéral Externe Conventionné (Année 2)",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Rééducation respiratoire active (BPCO), rééducation post-AVC, et traumatologie.</li>
+                        <li>Prévention active des chutes chez les seniors du QPV.</li>
+                        <li>Suivi de l'activité physique adaptée (APA) en lien avec le réseau SAPHYR 972.</li>
+                    </ul>`,
+                modalites: "Convention de coordination, messagerie sécurisée MSSanté, partages d'agendas et de fiches d'évolution de motricité.",
+                public: "Seniors à risque de chutes, patients post-AVC, traumatisés moteurs.",
+                axe: "Axe 1 & Axe 2",
+                protocol: "Suivi APA & Motricité"
+            },
+            lab: {
+                name: "Laboratoire de Biologie Médicale (Bio-Pôle)",
+                level: "Niveau 2",
+                portrait: "fa-solid fa-flask",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                status: "Laboratoire Partenaire de Proximité",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Réalisation des examens biologiques réguliers prescrits (HbA1c, bilans rénaux, lipidiques).</li>
+                        <li>Prélèvements sur site lors de permanences thématiques hebdomadaires au centre.</li>
+                        <li>Transmission automatisée des résultats critiques sous 24h.</li>
+                    </ul>`,
+                modalites: "Protocole d'interopérabilité (HPRIM/MSSanté) avec versement automatique au DPI du centre.",
+                public: "Tous patients de la file active du centre sous surveillance chronique.",
+                axe: "Tous Axes",
+                protocol: "HPRIM Interfacé"
+            },
+            gyno: {
+                name: "Gynécologue Spécialiste",
+                level: "Niveau 2",
+                portrait: "fa-solid fa-venus",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                status: "Spécialiste Externe Conventionné (Recours)",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Consultations d'expertise pour les pathologies gynécologiques complexes.</li>
+                        <li>Suivi spécifique et diagnostic de l'endométriose et parcours PMA.</li>
+                        <li>Téléexpertise asynchrone pour les avis rapides demandés par les MG et Sages-Femmes.</li>
+                    </ul>`,
+                modalites: "Convention d'adressage privilégié et messagerie MSSanté pour demandes d'avis.",
+                public: "Patientes présentant des pathologies gynécologiques lourdes ou suspectes.",
+                axe: "Axe 3 (Périnatalité & Femmes)",
+                protocol: "Téléexpertise Recours"
+            },
+            dent: {
+                name: "Chirurgiens-dentistes",
+                level: "Niveau 2",
+                portrait: "fa-solid fa-tooth",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                status: "Praticiens Partenaires Conventionnés",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Accès facilité aux soins bucco-dentaires conservateurs en Reste à Charge Zéro (RAC 0).</li>
+                        <li>Relais prioritaire pour le dispositif de prévention M'T Dents.</li>
+                        <li>Bilan bucco-dentaire annuel requis pour les patients diabétiques sous ALD.</li>
+                    </ul>`,
+                modalites: "Convention de coordination. Tiers-payant intégral, fiches d'adressage MSSanté.",
+                public: "Enfants du QPV (3-24 ans), patients diabétiques de type 2.",
+                axe: "Axe 1 & Axe 3",
+                protocol: "Dispositif M'T Dents"
+            },
+            ophtalmo: {
+                name: "Ophtalmologiste (Réseau Optacy)",
+                level: "Niveau 2",
+                portrait: "fa-solid fa-eye",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                status: "Médecin Spécialiste Partenaire",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Réalisation de photographies de fond d'œil par l'AM formée au centre (Rétinographie non mydriatique).</li>
+                        <li>Lecture et interprétation asynchrone à distance par l'ophtalmologiste référent.</li>
+                        <li>Prescription rapide et prioritaire sous protocole Reste à Charge Zéro.</li>
+                    </ul>`,
+                modalites: "Convention de dépistage et de téléexpertise. Intégration d'imagerie via la plateforme Optacy.",
+                public: "Patients diabétiques (dépistage annuel de la rétinopathie), seniors isolés.",
+                axe: "Axe 1 (Complications Diabète)",
+                protocol: "Télérétinographie"
+            },
+            predescu: {
+                name: "Dr Adriana Predescu (Radiologue référente)",
+                level: "Niveau 2",
+                portrait: "fa-solid fa-x-ray",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                status: "Médecin spécialiste externe conventionnée",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Assure la lecture prioritaire des mammographies et des imageries diagnostiques pour les patientes du centre de santé.</li>
+                        <li>Soutien technique pour la sensibilisation au dépistage organisé du cancer du sein (Octobre Rose).</li>
+                        <li>Transmission immédiate des suspicions de malignité pour enclencher le parcours d'oncologie.</li>
+                    </ul>`,
+                modalites: "Convention de coordination. Transmission des comptes-rendus d'imagerie via MSSanté et versement automatique dans le DMP.",
+                public: "Femmes âgées de 50 à 74 ans (cible du dépistage organisé du CRCDC).",
+                axe: "Axe 2 (Prévention)",
+                protocol: "Convention Dépistage"
+            },
+            had: {
+                name: "HAD & SSIAD",
+                level: "Niveau 2",
+                portrait: "fa-solid fa-house-medical",
+                badgeClass: "bg-magenta-100 text-magenta-950 border border-magenta-200",
+                status: "Structures médico-sociales partenaires de maintien à domicile",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li><strong>SSIAD :</strong> soins d'hygiène et nursing quotidien à domicile pour les personnes âgées en perte d'autonomie.</li>
+                        <li><strong>HAD :</strong> prise en charge au domicile de soins hautement complexes (nutrition entérale, chimiothérapie, soins palliatifs).</li>
+                        <li>Sécurisation des retours d'hospitalisation lourds.</li>
+                    </ul>`,
+                modalites: "Convention de liaison, réunions de transmission de sortie d'hospitalisation, ligne téléphonique directe, fiches de liaison via MSSanté.",
+                public: "Seniors dépendants du QPV, patients atteints d'un cancer en phase avancée.",
+                axe: "Axe 1 et Axe 3",
+                protocol: "Protocole SSIAD-01 / HAD-01"
+            },
+            
+            // NIVEAU 3A: HUB SOCIAL
+            ccas: {
+                name: "CCAS de Fort-de-France (Hub Social - Pivot)",
+                level: "Niveau 3A",
+                badgeClass: "bg-purple-200 text-purple-950 border border-purple-300 shadow-sm",
+                portrait: "fa-solid fa-handshake-angle",
+                status: "Partenaire Social Pivot — Institution Municipale",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li><strong>Lien Direct & Pivot Unique du Hub Social :</strong> centralise tous les signalements de précarité sociale et d'illectronisme.</li>
+                        <li>Évaluation globale et orientation des patients signalés vers les aides sociales adaptées.</li>
+                        <li>Aides sociales d'urgence (aide alimentaire, kits d'hygiène, soutien au logement indigne).</li>
+                        <li>Rétablissement des droits sociaux de base (CSS, AME, RSA, demande d'aide ménagère).</li>
+                    </ul>`,
+                modalites: "Convention de partenariat. Transmission sécurisée de la <strong>Fiche de liaison médico-sociale standardisée</strong> via MSSanté ou courrier crypté. Consentement écrit obligatoire.",
+                public: "Toute personne en situation de vulnérabilité, rupture de droits ou précarité d'accès au transport.",
+                axe: "Tous Axes (Déterminants Sociaux)",
+                protocol: "Fiche CCAS Standardisée"
+            },
+            cpam: {
+                name: "CGSS / CPAM de la Martinique (Accès aux Droits)",
+                level: "Niveau 3A",
+                portrait: "fa-solid fa-shield-halved",
+                badgeClass: "bg-purple-100 text-purple-900 border border-purple-200",
+                status: "Assurance Maladie — Institution de Protection Sociale",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Aide prioritaire à l'ouverture des droits de base (Tiers-payant, CSS / Complémentaire Santé Solidaire, AME).</li>
+                        <li>Prise en charge et accompagnement des situations de renoncement financier aux soins.</li>
+                        <li>Promotion conjointe des examens de prévention en santé (EPS).</li>
+                    </ul>`,
+                modalites: "Espace AmeliPro sécurisé, plateforme de signalement de renoncement, conventions ACI pour le financement de la structure.",
+                public: "Assurés sociaux sans droits actifs, migrants sans couverture, bénéficiaires de minima sociaux.",
+                axe: "Accès aux droits",
+                protocol: "Indicateurs conventionnels ACI"
+            },
+            acise: {
+                name: "ACISE Martinique (Insertion & Logement)",
+                level: "Niveau 3A",
+                portrait: "fa-solid fa-briefcase",
+                badgeClass: "bg-purple-100 text-purple-900 border border-purple-200",
+                status: "Association d'Insertion Sociale et Économique",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Mise en œuvre de chantiers d'insertion et accompagnement social vers l'autonomie et le logement durable.</li>
+                        <li>Liaison d'urgence avec les pensions de famille et les Lits Halte Soins Santé (LHSS).</li>
+                        <li>Prise en charge globale des personnes en grande désocialisation.</li>
+                    </ul>`,
+                modalites: "Convention d'insertion médico-sociale, fiches de liaison cryptées.",
+                public: "Publics très marginalisés, jeunes adultes du QPV sans ressources.",
+                axe: "Accès aux droits",
+                protocol: "Accompagnement Logement Durable"
+            },
+            croixrouge: {
+                name: "Croix-Rouge Française (Aide d'urgence)",
+                level: "Niveau 3A",
+                portrait: "fa-solid fa-square-plus",
+                badgeClass: "bg-purple-100 text-purple-900 border border-purple-200",
+                status: "Délégation Territoriale de la Martinique",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Mise à disposition d'aide alimentaire d'urgence (colis d'urgence, épicerie solidaire).</li>
+                        <li>Distribution de kits d'hygiène et de secours vestimentaires.</li>
+                        <li>Médiation sociale 'hors-les-murs' via les maraudes de nuit de Fort-de-France.</li>
+                    </ul>`,
+                modalites: "Convention de coordination tripartite (CCAS / ACSB / Croix-Rouge).",
+                public: "Familles monoparentales en situation de crise aiguë, personnes sans ressources ou à la rue.",
+                axe: "Axe 3 (Familles) & Accès aux droits",
+                protocol: "Liaison Urgence Sociale"
+            },
+            caf: {
+                name: "CAF de la Martinique (Prestations Familiales)",
+                level: "Niveau 3A",
+                portrait: "fa-solid fa-people-roof",
+                badgeClass: "bg-purple-100 text-purple-900 border border-purple-200",
+                status: "Caisse d'Allocations Familiales",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Gestion active et accès facilité aux aides familiales, de logement et de garde d'enfant.</li>
+                        <li>Coordination étroite avec la sage-femme libérale pour le suivi des aides à la naissance et à la parentalité.</li>
+                        <li>Orientation directe des mères isolées en grande difficulté vers les relais d'aide sociale.</li>
+                    </ul>`,
+                modalites: "Contact référent social dédié, fiches d'adressage standardisées.",
+                public: "Familles monoparentales (51,9% de la file active), mères isolées du QPV.",
+                axe: "Axe 3 (Mère/Enfant)",
+                protocol: "Protection Médico-Sociale de l'Enfance"
+            },
+            ml: {
+                name: "Mission Locale de Fort-de-France",
+                level: "Niveau 3A",
+                portrait: "fa-solid fa-graduation-cap",
+                badgeClass: "bg-purple-100 text-purple-900 border border-purple-200",
+                status: "Dispositif d'Insertion pour les Jeunes",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Repérage actif des jeunes en rupture de parcours d'insertion et de soins.</li>
+                        <li>Dispositif 'Pass Santé Jeunes' : orientation vers les consultations et bilans de santé du centre.</li>
+                        <li>Actions de prévention communes axées sur la santé sexuelle et les addictions des 16-25 ans.</li>
+                    </ul>`,
+                modalites: "Convention Pass Santé Jeunes, fiches d'orientation asynchrones.",
+                public: "Jeunes de 16 à 25 ans hors système scolaire, jeunes mères célibataires.",
+                axe: "Axe 2 & Axe 3",
+                protocol: "Pass Santé Jeunes"
+            },
+            ft: {
+                name: "France Travail Foyal (Fort-de-France)",
+                level: "Niveau 3A",
+                portrait: "fa-solid fa-person-digging",
+                badgeClass: "bg-purple-100 text-purple-900 border border-purple-200",
+                status: "Service Public de l'Emploi",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Dispositif conjoint 'Santé-Emploi' pour lever les freins de santé à l'insertion professionnelle.</li>
+                        <li>Orientation directe des demandeurs d'emploi de longue durée vers des bilans de santé préventifs.</li>
+                        <li>Collaboration avec la médecine du travail pour l'évaluation de l'aptitude physique.</li>
+                    </ul>`,
+                modalites: "Convention d'orientation réciproque, fiches de suivi d'aptitude transmises par MSSanté.",
+                public: "Demandeurs d'emploi de longue durée, jeunes inactifs éloignés du soin.",
+                axe: "Axe 2 (Prévention)",
+                protocol: "Parcours Santé-Emploi"
+            },
+            retraite: {
+                name: "CGSS Retraite (Assurance Retraite)",
+                level: "Niveau 3A",
+                portrait: "fa-solid fa-person-cane",
+                badgeClass: "bg-purple-100 text-purple-900 border border-purple-200",
+                status: "Caisse Générale de Sécurité Sociale - Pôle Retraite",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Actions de prévention de la perte d'autonomie (ateliers mémoire, équilibre, nutrition).</li>
+                        <li>Aide financière et technique pour l'aménagement du domicile des seniors isolés.</li>
+                        <li>Déclenchement d'évaluations médico-sociales à domicile pour l'attribution d'aides (APA).</li>
+                    </ul>`,
+                modalites: "Fiche de signalement standardisée via liaison CLIC/MAIA, transmission d'alertes de dépendance.",
+                public: "Seniors du QPV de plus de 60 ans, personnes âgées fragiles.",
+                axe: "Axe 1 & Axe 2",
+                protocol: "Signalement CLIC/MAIA"
+            },
+
+            // NIVEAU 3B: HUB PREVENTION
+            crcdc: {
+                name: "CRCDC Martinique (Centre de dépistage des cancers)",
+                level: "Niveau 3B",
+                portrait: "fa-solid fa-ribbon",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Dispositif régional de dépistage organisé",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Identification des résidents du QPV en retard de dépistage organisé (sein, colorectal, col).</li>
+                        <li>Envoi régulier au centre de listes ciblées de patients à relancer.</li>
+                        <li>Fourniture de kits d'auto-dépistage colorectal gratuits à distribuer directement au centre.</li>
+                    </ul>`,
+                modalites: "Échanges de fichiers de cohortes cryptés selon les référentiels de l'ANS via MSSanté.",
+                public: "Populations éligibles aux dépistages nationaux selon l'âge (50-74 ans).",
+                axe: "Axe 2 (Prévention / Dépistage)",
+                protocol: "Dépistage Organisé National"
+            },
+            saphyr: {
+                name: "Réseau SAPHYR 972 (Sport sur Ordonnance)",
+                level: "Niveau 3B",
+                portrait: "fa-solid fa-person-running",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Dispositif Associatif de Prescription du Sport",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Permet aux médecins du centre de prescrire des séances d'Activité Physique Adaptée (APA).</li>
+                        <li>Sélectionne et oriente le patient vers des éducateurs sportifs certifiés de Fort-de-France.</li>
+                        <li>Assure le reconditionnement physique sécurisé pour lutter contre la sédentarité métabolique.</li>
+                    </ul>`,
+                modalites: "Contrat d'adhésion de l'ACSB. Prescription de l'APA via un formulaire d'évaluation cardiologique type, retour d'évolution sur ordonnance.",
+                public: "Patients hypertendus stables, diabétiques de type 2 sédentaires, personnes âgées fragiles.",
+                axe: "Axes 1 et 2",
+                protocol: "Prescription APA Saphyr"
+            },
+            pmi: {
+                name: "Protection Maternelle et Infantile (PMI Martinique)",
+                level: "Niveau 3B",
+                portrait: "fa-solid fa-children",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Dispositif Départemental de Protection Maternelle et Infantile",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Suivi médico-social précoce des nourrissons et des enfants de moins de 6 ans.</li>
+                        <li>Actions conjointes de vaccination et d'accompagnement de la parentalité dans le QPV.</li>
+                        <li>Raccordement des mères isolées vers les puéricultrices et assistants sociaux du département.</li>
+                    </ul>`,
+                modalites: "Protocoles d'adressage médico-sociaux réciproques, fiches de liaison via MSSanté.",
+                public: "Femmes enceintes très jeunes, nourrissons en fragilité de développement ou de poids.",
+                axe: "Axe 3 (Périnatalité)",
+                protocol: "Protection Précoce Mère-Enfant"
+            },
+            cegidd: {
+                name: "CeGIDD Martinique (Santé Sexuelle)",
+                level: "Niveau 3B",
+                portrait: "fa-solid fa-vials",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Dépistage, Prévention et Vaccination en Santé Sexuelle",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Dépistage gratuit des infections sexuellement transmissibles (IST), du VIH et des hépatites.</li>
+                        <li>Promotion active du préservatif et accompagnement à la contraception.</li>
+                        <li>Mise à jour vaccinale ciblée (VHB, papillomavirus / HPV chez les adolescents).</li>
+                    </ul>`,
+                modalites: "Partenariat asynchrone, orientation vers le CHU de Martinique, fiches de liaison sécurisées.",
+                public: "Adolescents, jeunes adultes du centre-ville, publics particulièrement exposés.",
+                axe: "Axe 2 & Axe 3",
+                protocol: "Prévention Infections & Vaccination"
+            },
+            csapa: {
+                name: "CSAPA / CAARUD de Fort-de-France",
+                level: "Niveau 3B",
+                portrait: "fa-solid fa-pills",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Addictologie et réduction des risques",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Prise en charge pluridisciplinaire des addictions sévères (alcool, crack, cannabis, tabac).</li>
+                        <li>Prescription et suivi des Traitements de Substitution aux Opiacés (TSO) en coordination avec les MG.</li>
+                        <li>Distribution de matériel stérile de réduction des risques (RDRD) en centre-ville.</li>
+                    </ul>`,
+                modalites: "Protocole d'adressage direct bidirectionnel sécurisé, réunions d'évaluation clinique.",
+                public: "Personnes en situation d'addiction sévère ou de marginalité extrême.",
+                axe: "Axe 2 (Prévention)",
+                protocol: "Protocole de RDRD"
+            },
+            ireps: {
+                name: "IREPS Martinique",
+                level: "Niveau 3B",
+                portrait: "fa-solid fa-chalkboard-user",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Instance Régionale d'Éducation et de Promotion de la Santé",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Appui méthodologique en éducation pour la santé et élaboration de campagnes territoriales.</li>
+                        <li>Mise à disposition d'outils pédagogiques et de supports d'information sur la santé.</li>
+                        <li>Co-construction d'animations thématiques adaptées au contexte culturel antillais.</li>
+                    </ul>`,
+                modalites: "Partenariat d'appui technique, réunions régulières de planification stratégique.",
+                public: "Population générale, patients chroniques, enfants et familles du QPV.",
+                axe: "Axe 2 (Prévention)",
+                protocol: "Soutien Méthodologique"
+            },
+            afd: {
+                name: "AFD 972 (Association des diabétiques)",
+                level: "Niveau 3B",
+                portrait: "fa-solid fa-droplet",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Fédération Française des Diabétiques - Antille",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Ateliers collectifs d'éducation thérapeutique (ETP) animés par des patients-experts.</li>
+                        <li>Groupes d'échange et partage d'expérience pour briser l'isolement lié à la maladie.</li>
+                        <li>Participation active aux campagnes territoriales de dépistage gratuit du diabète de type 2.</li>
+                    </ul>`,
+                modalites: "Convention d'intégration au pôle éducation du centre, co-animation de réunions d'information.",
+                public: "Patients diabétiques and leurs aidants familiaux.",
+                axe: "Axe 1 & Axe 2",
+                protocol: "Accompagnement par les Pairs"
+            },
+            cpamprev: {
+                name: "Assurance Maladie (Service Prévention)",
+                level: "Niveau 3B",
+                portrait: "fa-solid fa-heart-pulse",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "CGSS Martinique - Pôle Prévention",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Promotion et co-organisation des campagnes nationales de prévention et de dépistage.</li>
+                        <li>Facilitation administrative pour les démarches et l'éligibilité aux bilans de santé.</li>
+                        <li>Appui à la planification de journées 'Santé Publique' thématiques (diabète, HTA, vaccination).</li>
+                    </ul>`,
+                modalites: "Échanges via l'espace AmeliPro, fiches de suivi.",
+                public: "Assurés sociaux du QPV, assurés éloignés du système de soin régulier.",
+                axe: "Axe 2 (Prévention)",
+                protocol: "Dispositifs Prévention CPAM"
+            },
+
+            // DISPOSITIFS DE PREVENTION CLINIQUE (Added N3B Elements)
+            mrtc: {
+                name: "Mission Retrouve Ton Cap (MRTC)",
+                level: "Dispositif (N3B)",
+                portrait: "fa-solid fa-weight-scale",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Dispositif CPAM de prévention de l'obésité infantile",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Prise en charge précoce, pluridisciplinaire et remboursée à 100% de l'obésité infantile.</li>
+                        <li>Permet l'accès gratuit à des bilans diététiques, psychologiques et d'activité physique.</li>
+                        <li>Mise en relation et concertation directe entre le médecin généraliste et la diététicienne conventionnée.</li>
+                    </ul>`,
+                modalites: "Formulaire d'inclusion complété par le médecin généraliste, prescription coordonnée, suivi de facturation directe à la CPAM.",
+                public: "Enfants de 3 à 17 ans présentant un IMC hors courbe.",
+                axe: "Axe 3 (Pédiatrie)",
+                protocol: "Prise en charge 100% CPAM"
+            },
+            mbp: {
+                name: "Mon Bilan Prévention (MBP)",
+                level: "Dispositif (N3B)",
+                portrait: "fa-solid fa-clipboard-check",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Dispositif National de l'Assurance Maladie",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Réalisation de bilans de prévention personnalisés aux âges clés de la vie ($\ge 16$ ans, 40-45 ans, 60-65 ans, 70-75 ans).</li>
+                        <li>Évaluation approfondie des facteurs de risque (cardiovasculaires, cancers, santé mentale, habitudes de vie).</li>
+                        <li>Établissement d'un Plan Personnalisé de Prévention (PPP) partagé avec le médecin traitant.</li>
+                    </ul>`,
+                modalites: "Consultation dédiée facturée 100% Assurance Maladie. Saisie des objectifs dans le DMP.",
+                public: "Assurés du QPV aux tranches d'âge clés définies par l'Assurance Maladie.",
+                axe: "Axe 2 (Prévention)",
+                protocol: "Mon Bilan Prévention"
+            },
+            chlordecone: {
+                name: "Dépistage Chlordécone (Plan IV ARS)",
+                level: "Dispositif (N3B)",
+                portrait: "fa-solid fa-leaf",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Action de Santé Publique Territoriale — ARS Martinique",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Repérage de l'exposition environnementale et alimentaire à la chlordécone chez les patients du QPV.</li>
+                        <li>Prescription et suivi des dosages sanguins (chlordéconémie) pour les publics vulnérables ou exposés.</li>
+                        <li>Conseils de prévention nutritionnels adaptés (sécurisation des circuits, auto-production).</li>
+                    </ul>`,
+                modalites: "Dosage sanguin entièrement pris en charge par l'ARS Martinique. Orientation vers la diététicienne.",
+                public: "Femmes enceintes, enfants, consommateurs de produits de circuits informels.",
+                axe: "Axe 2 & Axe 3",
+                protocol: "Plan Chlordécone IV"
+            },
+            cssj: {
+                name: "Consultations de Santé Sexuelle des Jeunes (CSSJ)",
+                level: "Dispositif (N3B)",
+                portrait: "fa-solid fa-venus-mars",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Dispositif National de Prévention",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Accès anonyme et gratuit à des consultations d'information, de dépistage des IST et de contraception.</li>
+                        <li>Prescription et délivrance de contraception d'urgence ou régulière pour les mineures.</li>
+                        <li>Sensibilisation et distribution de préservatifs, dépistage rapide VIH/Syphilis (TROD).</li>
+                    </ul>`,
+                modalites: "Prise en charge à 100% sans avance de frais. Confidentialité absolue garantie.",
+                public: "Adolescents, mineurs de plus de 15 ans, jeunes adultes.",
+                axe: "Axe 3 (Périnatalité & Jeunes)",
+                protocol: "CSSJ Anonyme"
+            },
+            vaccin: {
+                name: "Campagnes de Vaccination & Rattrapages",
+                level: "Dispositif (N3B)",
+                portrait: "fa-solid fa-syringe",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Dispositif de Prévention Clinique",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Mise à jour systématique du statut vaccinal dans le cadre du calendrier des vaccinations en vigueur.</li>
+                        <li>Campagnes de rattrapage ciblées (Grippe, COVID-19, HPV chez les adolescents du QPV).</li>
+                        <li>Alimentation systématique du carnet de vaccination électronique sur Mon Espace Santé.</li>
+                    </ul>`,
+                modalites: "Actes de vaccination réalisés par les MG salariés et l'IPA externe sous protocole, enregistrés dans le DPI Doctolib.",
+                public: "Enfants, adolescents, seniors, personnes fragiles.",
+                axe: "Axe 2 (Prévention)",
+                protocol: "Calendrier Vaccinal ANS"
+            },
+            monsoutienpsy: {
+                name: "Dispositif Mon Soutien Psy",
+                level: "Dispositif (N3B)",
+                portrait: "fa-solid fa-head-side-virus",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Séances d'accompagnement psychologique remboursées",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li>Prise en charge de séances d'accompagnement psychologique par année civile avec un professionnel conventionné.</li>
+                        <li>Prise en charge à 100% par l'Assurance Maladie sans avance de frais pour les bénéficiaires de la C2S ou de l'AME.</li>
+                        <li>Accès simplifié sans prescription médicale obligatoire pour l'ensemble de la population éligible.</li>
+                    </ul>`,
+                modalites: "Intégration et adressage coordonné sous protocole direct vers les psychologues partenaires de Niveau 2.",
+                public: "Toute personne dès 3 ans présentant un trouble psychique d'intensité légère à modérée.",
+                axe: "Axe 2 & Axe 3 (Santé Mentale / Périnat)",
+                protocol: "Dispositif National Ameli"
+            },
+            depistagecancer: {
+                name: "Dépistages Organisés des Cancers",
+                level: "Dispositif (N3B)",
+                portrait: "fa-solid fa-stethoscope",
+                badgeClass: "bg-sky-100 text-sky-900 border border-sky-200",
+                status: "Campagnes Nationales Organisées (INCa / CRCDC)",
+                mission: `
+                    <ul class="list-disc pl-4 space-y-1.5">
+                        <li><strong>Cancer du Sein :</strong> Mammographie bilatérale tous les 2 ans pour les femmes de 50 à 74 ans (double lecture radiologique Dr Predescu).</li>
+                        <li><strong>Cancer Colorectal :</strong> Remise et suivi d'observance des kits d'auto-dépistage immunologiques au centre de santé.</li>
+                        <li><strong>Col de l'Utérus :</strong> Frottis et dépistages HPV réguliers réalisés par les MG ou Sages-Femmes du centre.</li>
+                    </ul>`,
+                modalites: "Fichiers de liaison sécurisés et requêtes de cohortes avec le CRCDC Martinique.",
+                public: "Hommes et femmes éligibles selon les tranches d'âge des campagnes nationales.",
+                axe: "Axe 2 (Prévention)",
+                protocol: "Programmes Nationaux de Dépistage"
+            }
+        };
+
+        const scenarios = {
+            'scen-diabetes': {
+                step1: "Patrick, 60 ans, se présente à l'accueil du centre. L'Assistante Médicale l'accueille, constate un renouvellement d'ordonnance en retard, et remarque une tension de 190/110 mmHg. Elle active l'étiquette 'Vulnérabilité' sur Doctolib.",
+                step2: "Le Médecin Généraliste reçoit Patrick en urgence grâce à l'alerte du DPI. Heureusement, grâce aux protocoles de l'Axe 1, il ajuste le traitement, prescrit un bilan biologique et l'oriente vers l'IPA pour son suivi.",
+                step3: "Patrick est orienté vers le pédicure-podologue libéral conventionné (Niveau 2) pour un soin POD de Grade 2. Les résultats du bilan d'imagerie du Dr Predescu sont versés directement dans son DMP.",
+                step4: "Face à une rupture de droits CPAM, l'AM transmet une fiche médico-sociale au CCAS. Le CCAS débloque l'aide alimentaire et rétablit ses droits CSS en 10 jours, évitant le renoncement aux soins.",
+                observation: "Cet enchaînement démontre l'efficacité du couplage médico-social. La détection précoce des constantes (Niveau 1) évite la crise cardiovasculaire. Le relais d'imagerie et de podologie (Niveau 2) assure le traitement des complications. L'appui du CCAS (Niveau 3A - Hub Social) résout le déterminant social pour pérenniser l'observance thérapeutique.",
+                rgpd: "Fiche CCAS signée avec consentement écrit, transmise sous canal crypté.",
+                si: "DPI Doctolib Ségur + alimentation DMP en 24h + MSSanté CCAS."
+            },
+            'scen-maternity': {
+                step1: "Naïma, 28 ans, enceinte de 4 mois, consulte pour la première fois. L'AM bilingue l'accueille en créole, vérifie ses droits d'AME, et l'accompagne à l'activation de 'Mon Espace Santé' sur tablette.",
+                step2: "Le MG2 réalise la consultation, détecte des indicateurs de dénutrition et d'isolement psychologique lourd. Il planifie une RCP interne avec l'IPA pour le suivi ETP nutritionnel.",
+                step3: "Le centre l'oriente vers la Sage-femme libérale conventionnée pour l'Entretien Prénatal Précoce (EPP) et la Diététicienne pour adapter l'alimentation locale (Axe 3).",
+                step4: "L'AM transmet un signalement d'urgence sociale au CCAS et contacte la CAF. Naïma est logée temporairement par le réseau d'ACISE et bénéficie d'un suivi social renforcé.",
+                observation: "Le parcours de Naïma valide l'importance de l'accueil bilingue (Niveau 1). L'activation immédiate du DMP permet à la sage-femme et à la diététicienne (Niveau 2) de coordonner leurs conseils. Le hub social (Niveau 3A - CCAS et CAF) et le logement (ACISE) évitent la précarité résidentielle de fin de grossesse.",
+                rgpd: "Aucun partage d'information d'exil sans validation nominative du patient.",
+                si: "DPI Doctolib partagé + MSSanté Sage-femme."
+            },
+            'scen-geriatric': {
+                step1: "Mme Marie, 72 ans, vit isolée à Trénelle-Citron. Sa fille habitant en métropole prend RDV sur le site web du centre suite à une sortie d'hospitalisation complexe pour fracture du col du fémur.",
+                step2: "Le MG1 organise une visite à domicile, évalue le risque de glissement gériatrique et de sur-médication. Il rédige une lettre de liaison de conciliation médicamenteuse avec le pharmacien M. Cypria.",
+                step3: "Mise en place immédiate de la convention HAD & SSIAD de la Martinique et d'un Masseur-Kinésithérapeute (Niveau 2) au domicile pour la rééducation motrice et l'observance thérapeutique.",
+                step4: "Signalement d'aménagement de logement transmis à la CGSS Retraite et demande d'APA activée. Mme Marie intègre le réseau SAPHYR 972 (Niveau 3B - Hub Prévention) pour des ateliers d'équilibre.",
+                observation: "Ce scénario illustre l'envergure du maintien à domicile coordonné. Le binôme médecin-pharmacien (Niveau 1) sécurise la sortie d'hospitalisation. Le SSIAD et le MK (Niveau 2) soutiennent la motricité. La CGSS (Niveau 3A) et SAPHYR 972 (Niveau 3B - Hub Prévention) prennent le relais financier et physique.",
+                rgpd: "Partage de données cliniques d'urgence via bris de glace encadré.",
+                si: "MSSanté vers SSIAD + versement CR de sortie d'hospit. au DMP."
+            }
+        };
+
+        function switchView(viewName) {
+            const btnMap = document.getElementById('btn-view-map');
+            const btnFlow = document.getElementById('btn-view-flow');
+            const divMap = document.getElementById('view-map');
+            const divFlow = document.getElementById('view-flow');
+
+            if (viewName === 'map') {
+                btnMap.className = "px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 bg-white text-tropical-900 shadow-md flex items-center gap-2";
+                btnFlow.className = "px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 text-slate-600 hover:bg-slate-200 flex items-center gap-2";
+                divMap.classList.remove('hidden');
+                divFlow.classList.add('hidden');
+            } else {
+                btnFlow.className = "px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 bg-white text-tropical-900 shadow-md flex items-center gap-2";
+                btnMap.className = "px-4 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 text-slate-600 hover:bg-slate-200 flex items-center gap-2";
+                divFlow.classList.remove('hidden');
+                divMap.classList.add('hidden');
+                resetScenarioUI();
+            }
+        }
+
+        function selectNode(nodeId) {
+            document.querySelectorAll('.node-btn').forEach(btn => {
+                btn.classList.remove('border-tropical-500', 'border-magenta-500', 'border-purple-500', 'border-sky-500', 'shadow-md', 'bg-tropical-50/50', 'bg-magenta-50/50', 'bg-purple-50/50', 'bg-sky-50/50', 'ring-2', 'ring-slate-100');
+            });
+
+            const data = actors[nodeId];
+            if (!data) return;
+
+            const btn = document.getElementById(`node-${nodeId}`);
+            if (btn) {
+                if (data.level === 'Niveau 1') {
+                    btn.classList.add('border-tropical-500', 'bg-tropical-50/50', 'shadow-md', 'ring-2', 'ring-tropical-100');
+                } else if (data.level === 'Niveau 2') {
+                    btn.classList.add('border-magenta-500', 'bg-magenta-50/50', 'shadow-md', 'ring-2', 'ring-magenta-100');
+                } else if (data.level === 'Niveau 3A') {
+                    btn.classList.add('border-purple-500', 'bg-purple-50/50', 'shadow-md', 'ring-2', 'ring-purple-100');
+                } else {
+                    btn.classList.add('border-sky-500', 'bg-sky-50/50', 'shadow-md', 'ring-2', 'ring-sky-100');
+                }
+            }
+
+            // Update Dynamic Detail Pane (using icon wrapper fallback for all nodes)
+            if (data.portrait.startsWith('fa-')) {
+                let colorTheme = 'from-magenta-500 to-magenta-600';
+                if (data.level === 'Niveau 1') colorTheme = 'from-tropical-500 to-tropical-600';
+                if (data.level === 'Niveau 3A') colorTheme = 'from-purple-500 to-purple-600';
+                if (data.level === 'Niveau 3B' || data.level.includes('Dispositif')) colorTheme = 'from-sky-400 to-sky-500';
+                if (nodeId === 'cypria') colorTheme = 'from-emerald-500 to-emerald-600';
+
+                document.getElementById('detail-portrait-container').innerHTML = `
+                    <div class="relative h-14 w-14 rounded-2xl bg-gradient-to-tr ${colorTheme} flex items-center justify-center text-white text-xl shadow-md border border-white/20">
+                        <i class="${data.portrait}"></i>
+                    </div>
+                `;
+            } else {
+                document.getElementById('detail-portrait-container').innerHTML = `
+                    <img id="detail-portrait" src="${data.portrait}" alt="Portrait" class="relative h-14 w-14 object-cover rounded-2xl border border-slate-200 shadow-sm">
+                `;
+            }
+
+            document.getElementById('detail-name').innerText = data.name;
+            document.getElementById('detail-status').innerText = data.status;
+            document.getElementById('detail-badge').innerText = data.level;
+            document.getElementById('detail-badge').className = `px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full shadow-sm ${data.badgeClass}`;
+            document.getElementById('detail-mission').innerHTML = data.mission;
+            
+            document.getElementById('detail-modalites').innerHTML = data.modalites;
+            document.getElementById('sect-modalites').classList.remove('hidden');
+            
+            document.getElementById('detail-public').innerText = data.public;
+            document.getElementById('sect-public').classList.remove('hidden');
+
+            document.getElementById('detail-axe').innerText = data.axe;
+            document.getElementById('detail-sec-protocol').innerText = data.protocol;
+
+            // Soft scroll for smaller screens
+            if (window.innerWidth < 1280) {
+                document.getElementById('details-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function resetScenarioUI() {
+            for (let i = 1; i <= 4; i++) {
+                const el = document.getElementById(`step-${i}`);
+                el.className = "border border-slate-100 rounded-2xl p-5 bg-slate-50/50 text-center space-y-3 opacity-50 transition-all duration-300 flex flex-col justify-center";
+            }
+            document.getElementById('step-1-text').innerHTML = "Sélectionnez un scénario ci-dessus.";
+            document.getElementById('step-2-text').innerText = "-";
+            document.getElementById('step-3-text').innerText = "-";
+            document.getElementById('step-4-text').innerText = "-";
+            document.getElementById('scen-observation-box').classList.add('hidden');
+        }
+
+        // Trigger dynamic multi-step simulated parcours without images
+        function runScenario(scenKey) {
+            resetScenarioUI();
+            const data = scenarios[scenKey];
+            if (!data) return;
+
+            let colorClass = "border-tropical-500 bg-tropical-50/30 opacity-100 shadow-md ring-2 ring-tropical-100";
+            if (scenKey === 'scen-maternity') {
+                colorClass = "border-magenta-500 bg-magenta-50/30 opacity-100 shadow-md ring-2 ring-magenta-100";
+            } else if (scenKey === 'scen-geriatric') {
+                colorClass = "border-blue-500 bg-blue-50/30 opacity-100 shadow-md ring-2 ring-blue-100";
+            }
+
+            // Step 1 Trigger
+            setTimeout(() => {
+                const el = document.getElementById('step-1');
+                el.className = `border rounded-2xl p-5 text-center space-y-3 transition-all duration-500 scale-[1.02] flex flex-col justify-center ${colorClass}`;
+                document.getElementById('step-1-text').innerHTML = `<strong>Étape 1 :</strong> ${data.step1}`;
+            }, 100);
+
+            // Step 2 Trigger
+            setTimeout(() => {
+                const el = document.getElementById('step-2');
+                el.className = `border rounded-2xl p-5 text-center space-y-3 transition-all duration-500 scale-[1.02] flex flex-col justify-center ${colorClass}`;
+                document.getElementById('step-2-text').innerHTML = `<strong>Étape 2 :</strong> ${data.step2}`;
+            }, 1000);
+
+            // Step 3 Trigger
+            setTimeout(() => {
+                const el = document.getElementById('step-3');
+                el.className = `border rounded-2xl p-5 text-center space-y-3 transition-all duration-500 scale-[1.02] flex flex-col justify-center ${colorClass}`;
+                document.getElementById('step-3-text').innerHTML = `<strong>Étape 3 :</strong> ${data.step3}`;
+            }, 2000);
+
+            // Step 4 Trigger
+            setTimeout(() => {
+                const el = document.getElementById('step-4');
+                el.className = `border rounded-2xl p-5 text-center space-y-3 transition-all duration-500 scale-[1.02] flex flex-col justify-center ${colorClass}`;
+                document.getElementById('step-4-text').innerHTML = `<strong>Étape 4 :</strong> ${data.step4}`;
+            }, 3000);
+
+            // Summary Observations trigger
+            setTimeout(() => {
+                document.getElementById('scen-observation-box').classList.remove('hidden');
+                document.getElementById('scen-observation-text').innerHTML = data.observation;
+                document.getElementById('scen-rgpd').innerText = data.rgpd;
+                document.getElementById('scen-si').innerText = data.si;
+                document.getElementById('scen-observation-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 4000);
+        }
+
+        // Initialize MG1 details on load
+        window.onload = function() {
+            selectNode('mg1');
+        };
+    </script>
+</body>
+</html>
